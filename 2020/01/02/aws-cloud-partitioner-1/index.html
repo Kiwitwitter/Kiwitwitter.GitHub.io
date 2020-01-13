@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <title>
-    AWS Cloud Practitioner, Core Serviceds |
+    AWS Cloud Practitioner, Core Services |
     
     Peng&#39;s Blog</title>
   
@@ -39,7 +39,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      AWS Cloud Practitioner, Core Serviceds
+      AWS Cloud Practitioner, Core Services
     </h1>
   
   
@@ -147,7 +147,89 @@
 <li>Availability Zones</li>
 <li>Edge Locations</li>
 </ul>
-<h3 id="Regions"><a href="#Regions" class="headerlink" title="Regions"></a>Regions</h3><p>(To be continued…)</p>
+<h3 id="Regions"><a href="#Regions" class="headerlink" title="Regions"></a>Regions</h3><ul>
+<li>Regions are geographical zones that holds more than 2 availability zones, and are the organizing level for AWS services</li>
+<li>You need to pick the region where those resources are located for lower latency and minimizing costs and adhering regulatory requirements</li>
+<li>Services can be deployed in multi-regions that best suit the business’s needs</li>
+<li>Regions are completely separate entities from one another, resources in one region are not automatically replicated to another region, though some of the most common services are available in all regions</li>
+</ul>
+<h3 id="Availability-Zones"><a href="#Availability-Zones" class="headerlink" title="Availability Zones"></a>Availability Zones</h3><ul>
+<li>Availabilty Zones are a collection of data centers within a specific region.</li>
+<li>Each availability zone is physically isolated from the others, but connected together by a fast, low latency network</li>
+<li>Each availability zone is a physically distinct, independent infrastructure, physically and logically independent</li>
+<li>They also have their own discrete, uninterruptable power supply; onsite backup generators, cooling equipments and network connectivity</li>
+<li>Isolating the availability zone means they are protected from failures in other zones, which ensures high availability </li>
+<li>Data redundancy within a region means that if one zone goes down, the other zones can handle requests, that’s why AWS recommends provisioning your data across multiple Availability Zones as a best practice</li>
+</ul>
+<h3 id="Edge-Locations"><a href="#Edge-Locations" class="headerlink" title="Edge Locations"></a>Edge Locations</h3><ul>
+<li>Edge locations host a content delivery network, in short CDN, in Amazon CloudFront. CDN is used to deliver content to your customers , requests for content will be automatically routed to the nearest edge location so that the content is delivered faster to the end uses</li>
+<li>Edge Locations are typically located in highly poplated areas</li>
+</ul>
+<h2 id="Amazon-Virtual-Private-Cloud-VPC"><a href="#Amazon-Virtual-Private-Cloud-VPC" class="headerlink" title="Amazon Virtual Private Cloud (VPC)"></a>Amazon Virtual Private Cloud (VPC)</h2><h3 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h3><p>The resources and services must be accessible via normal IP protocols implemented with familiar network structures. Customers need to adhere to networking best practices as well as meet regularity and organizational requirement. Amazon Virtual Private Cloud, aka VPC meets all the network requirements.</p>
+<ul>
+<li>A private, virtual network in the AWS Cloud<ul>
+<li>Uses same concepts as on premise networking, like IP address spaces, subnets, and routing tables</li>
+</ul>
+</li>
+<li>Allows complete control of network configuration<ul>
+<li>Ability to isolate and expose resources inside VPC</li>
+</ul>
+</li>
+<li>Offeres several layers of security controls<ul>
+<li>Ability to allow and deny specific internet and internal traffic</li>
+</ul>
+</li>
+<li>Other AWS services deploy into VPC<ul>
+<li>Services inherent security built into network, integrated with numerous AWS services</li>
+</ul>
+</li>
+</ul>
+<h3 id="Features"><a href="#Features" class="headerlink" title="Features"></a>Features</h3><ul>
+<li><p>Builds upon high availability of AWS Regions and Availability zones</p>
+<ul>
+<li>VPC lives within a Region</li>
+<li>Multiple VPCs per accuount</li>
+</ul>
+</li>
+<li><p>Subnets</p>
+<ul>
+<li>Used to divide Amazon VPC</li>
+<li>Allows VPC to span multiple AZs</li>
+<li>You can create unlimited subnets, but the fewer is recommended to reduce the complexity</li>
+</ul>
+</li>
+<li><p>Route tables</p>
+<ul>
+<li>Control traffic going out of the subnets</li>
+</ul>
+</li>
+<li><p>Internet Gateway (IGW)</p>
+<ul>
+<li><p>Subnets can be public or priavte, public goes to internet, private doesn’t go to internet</p>
+</li>
+<li><p>Allows access to the Internet from VPC</p>
+</li>
+</ul>
+</li>
+<li><p>NAT Gateway</p>
+<ul>
+<li>Allows private subnet resources to access Internet</li>
+</ul>
+</li>
+<li><p>Network Access Control Lists (NACL)</p>
+<ul>
+<li>Control access to subnets, stateless</li>
+</ul>
+</li>
+</ul>
+<h3 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h3><ol>
+<li>Select Region</li>
+<li>Create the VPC, define IP Address space for the VPC</li>
+<li>Create subnets, specify the AZ of the subnet</li>
+<li>Add Internet Gateway</li>
+<li>Configure the acesss</li>
+</ol>
+<h2 id="AWS-Security-Groups"><a href="#AWS-Security-Groups" class="headerlink" title="AWS Security Groups"></a>AWS Security Groups</h2><p>At AWS, security groups will act like a built-in firewall for virtual servers. With these security groups, you have full control on how accessible your instances are. In another word, it is just another method to filter traffic to your instances, provides you control on what traffic to allow or deny. To do this, you need to configure a security group rule , that can vary from keeping instance completely private, totally public, or somewhere between.</p>
 
       
     </div>
@@ -155,7 +237,7 @@
       <a data-url="http://www.kiwitwitter.com/2020/01/02/aws-cloud-partitioner-1/" data-id="ck4xx4dnf0000iqp4347h38fp"
          class="article-share-link">Share</a>
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/aws/" rel="tag">aws</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/study/" rel="tag">study</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/aws-cloud-practitioner/" rel="tag">aws_cloud_practitioner</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/study/" rel="tag">study</a></li></ul>
 
     </footer>
 
