@@ -14,15 +14,15 @@
     <link rel="shortcut icon" href="/favicon.ico">
   
   
-<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="../../../../css/style.css">
 
   
     
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+<link rel="stylesheet" href="../../../../fancybox/jquery.fancybox.min.css">
 
   
   
-<script src="/js/pace.min.js"></script>
+<script src="../../../../js/pace.min.js"></script>
 
 <meta name="generator" content="Hexo 4.2.0"></head>
 
@@ -52,7 +52,7 @@
 
     
       <div class="article-meta">
-        <a href="/2020/01/12/aws-cloud-partitioner-2/" class="article-date">
+        <a href="" class="article-date">
   <time datetime="2020-01-13T07:53:51.000Z" itemprop="datePublished">2020-01-12</time>
 </a>
         
@@ -103,25 +103,87 @@
 </tr>
 </tbody></table>
 </li>
+<li><p>Added features</p>
+<ul>
+<li><p>Path and host-based routing</p>
+<ul>
+<li><p>Path-based provides rules that forward requests to different target groups</p>
+</li>
+<li><p>Host-based provides rules that forward requests to different target groups based on host name</p>
+</li>
+</ul>
+</li>
+<li><p>Deletion Protection &amp; Request tracing</p>
+<p>Request tracing can be used to track HTTP requests from clients to target</p>
+</li>
+<li><p>Dynamic Ports</p>
+<p>Amazon ECS integrates with Application Load Balancer to expose Dynamic Ports utilized by scheduled containers</p>
+</li>
+<li><p>AWS WAF (AWS Web Application Firewall)</p>
+</li>
+<li><p>Native IPv6 Support</p>
+</li>
+</ul>
+</li>
 </ul>
 <h3 id="Use-Case"><a href="#Use-Case" class="headerlink" title="Use Case"></a>Use Case</h3><ul>
-<li><p>Senarios:</p>
-<ul>
-<li>ability to use containers to host micro services and route to those applications from a single load balancer. (Application Load Balancer allows you to route differernt reqests to the same instance, but different path based on the port)</li>
-</ul>
-</li>
 <li><p>Sample use case:</p>
-<p><img src="/.com//alb.jpg" alt></p>
+<p><img src="https://raw.githubusercontent.com/Kiwitwitter/hexo-storage/master/img/Screen%20Shot%202020-01-13%20at%2010.34.40%20PM.jpg" alt></p>
 </li>
 </ul>
+<h2 id="Auto-Scaling"><a href="#Auto-Scaling" class="headerlink" title="Auto Scaling"></a>Auto Scaling</h2><h3 id="Service-Introduction-1"><a href="#Service-Introduction-1" class="headerlink" title="Service Introduction"></a>Service Introduction</h3><p>Auto Scaling helps you ensure that you have the correct number of Amazon EC2 instances available to handle the load for your application. </p>
+<p>We need to monitor the workload using Amazon CloudWatch, though CloudWatch will not add or remove EC2 instances.</p>
+<p>We need to keep Scalibity as well as Automation.</p>
+<h3 id="Overview-1"><a href="#Overview-1" class="headerlink" title="Overview"></a>Overview</h3><ul>
+<li><p>Scaling out and Scaling in</p>
+<ul>
+<li>Auto Scaling can automatically adjust the number of EC2 instances running based in the condition that user defines, or as scheduled.</li>
+<li>If Auto Scaling adds more instances, this is termed <strong>scaling out</strong>.</li>
+<li>When Auto Scaling terminates instances, this is termed <strong>scaling in</strong>.</li>
+</ul>
+</li>
+<li><p>Auto Scaling Components</p>
+<ul>
+<li>Launch Configuration<ul>
+<li>AMI</li>
+<li>Instance type</li>
+<li>Security Groups</li>
+<li>Roles</li>
+</ul>
+</li>
+<li>Auto Scaling Group<ul>
+<li>VPC and Subnet(s)</li>
+<li>Load Balancer</li>
+<li>Minimum instances</li>
+<li>Maximum insatnces</li>
+<li>Desired capacity</li>
+</ul>
+</li>
+<li>Auto Scaling Policy<ul>
+<li>Scheduled</li>
+<li>On-demand</li>
+<li>Scale-out policy</li>
+<li>Scale-in policy</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Dynamic Auto Scaling</p>
+<p><img src="https://raw.githubusercontent.com/Kiwitwitter/hexo-storage/master/img/Screen%20Shot%202020-01-13%20at%2011.51.03%20PM.jpg" alt></p>
+</li>
+</ul>
+<h2 id="Amazon-Route-53"><a href="#Amazon-Route-53" class="headerlink" title="Amazon Route 53"></a>Amazon Route 53</h2><h3 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h3><p>  Amazon Route 53 is a Domain Name System, or DNS, web service designed to provide businesses and developers with a reliable and highly scalable way to route end-user t internet applications.</p>
+<h3 id="How-does-it-work"><a href="#How-does-it-work" class="headerlink" title="How does it work?"></a>How does it work?</h3><p>  <img src="https://raw.githubusercontent.com/Kiwitwitter/hexo-storage/master/img/Screen%20Shot%202020-01-14%20at%2012.11.15%20AM.jpg" alt></p>
+<p>  The user asks to translate a name into an IP address &lt;A&gt; and Route 53 does the translation.</p>
+<p>(To be continued…)</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.kiwitwitter.com/2020/01/12/aws-cloud-partitioner-2/" data-id="ck5dieyvp0000wgp48sakb0dh"
+      <a data-url="http://www.kiwitwitter.com/2020/01/12/aws-cloud-partitioner-2/" data-id="ck5dm9wz00002rlp42mephmuk"
          class="article-share-link">Share</a>
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/aws-cloud-practitioner/" rel="tag">aws_cloud_practitioner</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/study/" rel="tag">study</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../../../tags/aws-cloud-practitioner/" rel="tag">aws_cloud_practitioner</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../../../tags/study/" rel="tag">study</a></li></ul>
 
     </footer>
 
@@ -132,7 +194,7 @@
   <nav class="article-nav">
     
     
-      <a href="/2020/01/02/aws-cloud-partitioner-1/" class="article-nav-link">
+      <a href="../../02/aws-cloud-partitioner-1/" class="article-nav-link">
         <strong class="article-nav-caption">Olde posts</strong>
         <div class="article-nav-title">AWS Cloud Practitioner, Core Services</div>
       </a>
@@ -146,13 +208,13 @@
     
   <div class="gitalk" id="gitalk-container"></div>
   
-<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<link rel="stylesheet" href="../../../../https:/unpkg.com/gitalk/dist/gitalk.css">
 
   
-<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script src="../../../../https:/unpkg.com/gitalk/dist/gitalk.min.js"></script>
 
   
-<script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.min.js"></script>
+<script src="../../../../https:/cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.min.js"></script>
 
   <script type="text/javascript">
     var gitalk = new Gitalk({
@@ -184,6 +246,8 @@
   
     <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
   
+    <li><i class="fe fe-bookmark"></i> <span id="busuanzi_value_page_pv"></span></li>
+  
 </ul>
     </div>
     <ul class="list-inline">
@@ -202,25 +266,25 @@
 <nav class="navbar">
   
     <div class="logo">
-      <a href="/"><img src="/images/hexo.svg" alt="Peng&#39;s Blog"></a>
+      <a href="../../../../index.html"><img src="/images/hexo.svg" alt="Peng&#39;s Blog"></a>
     </div>
   
   <ul class="nav nav-main">
     
       <li class="nav-item">
-        <a class="nav-item-link" href="/">Home</a>
+        <a class="nav-item-link" href="../../../../index.html">Home</a>
       </li>
     
       <li class="nav-item">
-        <a class="nav-item-link" href="/archives">Archives</a>
+        <a class="nav-item-link" href="../../../../archives">Archives</a>
       </li>
     
       <li class="nav-item">
-        <a class="nav-item-link" href="/gallery">Gallery</a>
+        <a class="nav-item-link" href="../../../../gallery">Gallery</a>
       </li>
     
       <li class="nav-item">
-        <a class="nav-item-link" href="/about">About</a>
+        <a class="nav-item-link" href="../../../../about">About</a>
       </li>
     
     <li class="nav-item">
@@ -240,7 +304,7 @@
     </li>
     <li class="nav-item">
       
-        <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <a class="nav-item-link" target="_blank" href="../../../../atom.xml" title="RSS Feed">
           <i class="fe fe-feed"></i>
         </a>
       
@@ -255,26 +319,26 @@
 </div>
   </aside>
   
-<script src="/js/jquery-2.0.3.min.js"></script>
+<script src="../../../../js/jquery-2.0.3.min.js"></script>
 
 
-<script src="/js/jquery.justifiedGallery.min.js"></script>
+<script src="../../../../js/jquery.justifiedGallery.min.js"></script>
 
 
-<script src="/js/lazyload.min.js"></script>
+<script src="../../../../js/lazyload.min.js"></script>
 
 
-<script src="/js/busuanzi-2.3.pure.min.js"></script>
-
-
-  
-<script src="/fancybox/jquery.fancybox.min.js"></script>
-
-
+<script src="../../../../js/busuanzi-2.3.pure.min.js"></script>
 
 
   
-<script src="/js/tocbot.min.js"></script>
+<script src="../../../../fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+  
+<script src="../../../../js/tocbot.min.js"></script>
 
   <script>
     // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
@@ -292,7 +356,7 @@
 
 
 
-<script src="/js/ocean.js"></script>
+<script src="../../../../js/ocean.js"></script>
 
 
 </body>
