@@ -82,7 +82,7 @@
 <li>VPC and Subnet(s)</li>
 <li>Load Balancer</li>
 <li>Minimum instances</li>
-<li>Maximum insatnces</li>
+<li>Maximum instances</li>
 <li>Desired capacity</li>
 </ul>
 </li>
@@ -102,7 +102,327 @@
 <h2 id="Amazon-Route-53"><a href="#Amazon-Route-53" class="headerlink" title="Amazon Route 53"></a>Amazon Route 53</h2><h3 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h3><p>  Amazon Route 53 is a Domain Name System, or DNS, web service designed to provide businesses and developers with a reliable and highly scalable way to route end-user t internet applications.</p>
 <h3 id="How-does-it-work"><a href="#How-does-it-work" class="headerlink" title="How does it work?"></a>How does it work?</h3><p>  <img src="https://raw.githubusercontent.com/Kiwitwitter/hexo-storage/master/img/Screen%20Shot%202020-01-14%20at%2012.11.15%20AM.jpg" alt></p>
 <p>  The user asks to translate a name into an IP address &lt;A&gt; and Route 53 does the translation.</p>
-<p>(To be continued…)</p>
+<h2 id="Amazon-Relational-Database-Services-RDS"><a href="#Amazon-Relational-Database-Services-RDS" class="headerlink" title="Amazon Relational Database Services (RDS)"></a>Amazon Relational Database Services (RDS)</h2><h3 id="Challenges-of-Relational-Database"><a href="#Challenges-of-Relational-Database" class="headerlink" title="Challenges of Relational Database"></a>Challenges of Relational Database</h3><ul>
+<li>Server Mantenance and energy footprint</li>
+<li>Software install and patches</li>
+<li>database backups and high availability</li>
+<li>Limits on scalability</li>
+<li>Data security</li>
+<li>OS install and patches</li>
+</ul>
+<h3 id="Service-Introduction-2"><a href="#Service-Introduction-2" class="headerlink" title="Service Introduction"></a>Service Introduction</h3><p>Amazon RDS is a managed service that sets up and operates a relational database in the cloud, Amazon RDS provides a cost-efficient and resizable capacity while automating time-consuming administrative tasks. </p>
+<p>Amazon RDS gives the performance, high availability, security, and compatibility to users.</p>
+<p><img src="https://raw.githubusercontent.com/Kiwitwitter/hexo-storage/master/img/Screen%20Shot%202020-01-18%20at%201.00.17%20AM.jpg" alt></p>
+<p>Amazon RDS manages:</p>
+<ul>
+<li>OS Installation and patches</li>
+<li>Database software install and patches</li>
+<li>Database backups</li>
+<li>High Availability</li>
+<li>Scaling</li>
+<li>Power and rack &amp; stack</li>
+<li>Server maintenance</li>
+</ul>
+<h3 id="Overview-and-Use-Cases"><a href="#Overview-and-Use-Cases" class="headerlink" title="Overview and Use Cases"></a>Overview and Use Cases</h3><p>The basic building block if Amazon RFS is the database instance. A database instance is an isolated environment that can contain multiple user-created databases and can be accessed by using the same tools and applications that you use with a standalone database instance.</p>
+<p>The resources found in a database instance are determined by its database instance class, the type of storage, is dictated by the type of disks.</p>
+<p>DB Instance class includes:</p>
+<ul>
+<li>CPU</li>
+<li>Memory</li>
+<li>Network performance</li>
+</ul>
+<p>DB Instance Storage Includes:</p>
+<ul>
+<li>Magnetic</li>
+<li>General purpose (SSD)</li>
+<li>Provisioned IOPS</li>
+</ul>
+<p>Amazon RDS currently supports 6 databases:</p>
+<ul>
+<li>MySQL</li>
+<li>Amazon Aurora</li>
+<li>Microsoft Sequel Server</li>
+<li>PostgreSQL</li>
+<li>MariaDB</li>
+<li>Oracle</li>
+</ul>
+<p>You can run an instance using Amazon VPC and have control of the virtual networking environment.</p>
+<p><img src="https://raw.githubusercontent.com/Kiwitwitter/hexo-storage/master/img/Screen%20Shot%202020-01-18%20at%201.51.13%20AM.jpg" alt></p>
+<p>User can select own IP address range, create subnets, and configure routing and access control lists.  </p>
+<p>The basic functionality of Amazon RDS is the same whether or not it is in the VPC. But usually the database insatcne is isolated in an VPC and is only made directly accessible to indicated application instances.</p>
+<p>One of the most powerful features of Amazon RDS is the ability to configure the database instance for high availability with a multi-agency deployment. Once configured, RDS automatically generates a standby copy of the database instance in another Availability Zone within the same VPC. After seeding the database copy, transactions are synchronously replicated to the standby copy. </p>
+<p><img src="https://raw.githubusercontent.com/Kiwitwitter/hexo-storage/master/img/Screen%20Shot%202020-01-18%20at%202.00.45%20AM.jpg" alt></p>
+<p>Having multi-AZ RDS database can provide high availability as well as protection against database instance failure. If one master instance failed, the RDS can bring the replication online as the new master instance. And there should be no data loss due to the synchronous replication. Because applications reference the database by name using RDS DNS endpoint, user don’t need to change anything in the application code to use the standby copy.</p>
+<p>RDS also supports the creation of read replicas for MySQL, MariaDB, PostgreSQL and Amazon Aurora. Updates made to the source database instances are asynchronously copied to the read replica instance. User can reduce the read load on source by routing read queries to read replicas, and can also scale out beyond the capacity constraints of a single database instance for read-heavy database workloads. Read replica can also be promoted to become the master database instance, but due to asynchronous replication, this requires manual action.</p>
+<p>Read replicas can be created in a different region than the master database, which help satisfy disaster recovery requirements or cutting down latency by redirecting read queries to to a read replica. </p>
+<p>Use cases:</p>
+<ul>
+<li><p>RDS is ideal for Web and mobile applications that need a database with high throughput, massive storage scalability and high availability. </p>
+</li>
+<li><p>RDS doesn’t have any licensing constraints, it perfectly fits the variable usage pattern of these applications. RDS also provides a flexible, secured, and low-cost database solution for online sales and retailing. </p>
+</li>
+<li><p>RDS manages the database infrastructure, so mobile and online game developers don’t have to worry about provisioning, scaling, or monitoring database servers. </p>
+</li>
+</ul>
+<h3 id="Benefits"><a href="#Benefits" class="headerlink" title="Benefits"></a>Benefits</h3><ul>
+<li>Highly scalable</li>
+<li>HIgh Performance</li>
+<li>Easy to administer</li>
+<li>Available and durable</li>
+<li>Secure and compliant</li>
+</ul>
+<h2 id="AWS-Lambda"><a href="#AWS-Lambda" class="headerlink" title="AWS Lambda"></a>AWS Lambda</h2><h3 id="Overview-2"><a href="#Overview-2" class="headerlink" title="Overview"></a>Overview</h3><ul>
+<li><p>Feature</p>
+<ul>
+<li>Fully-Managed serverless compute</li>
+<li>Event-driven execution</li>
+<li>Sub-second meeting</li>
+<li>Multiple languages supported</li>
+</ul>
+</li>
+<li><p>AWS Lambda is compute service that lets users run code with provisioning or managing services. AWS Lambda executes code only when needed and scales automatically to thousands of requests per second. </p>
+</li>
+<li><p>AWS Lambda runs code on a highly available compute infrastructure, which provides all administration, including server and operating system maintenance, capacity provisioning, and auto-scaling, code monitoring and logging.</p>
+</li>
+<li><p>AWS Lambda supports a variety of programming languages, including Node.js, Java, C# and Python.</p>
+</li>
+<li><p>AWS Lambda is a event-based computing, user can run code in response to events, including changes to Amazon S3 buckets or an Amazon DynamoDB table.</p>
+</li>
+<li><p>Lambda can respond to HTTP requests using Amazon API Gateway, and caan also invoke code using API calls made using AWS SDKs. </p>
+</li>
+<li><p>AWS Lambda is intended to support serverless and micro-service applications. User can build serverless applications that are triggered by AWS Lambda functions, and can automatically deploy them using AWS CodePipeline, AWS CodeDeploy</p>
+</li>
+</ul>
+<h3 id="Use-Cases"><a href="#Use-Cases" class="headerlink" title="Use Cases"></a>Use Cases</h3><p>It’s very simple to use AWS Lambda, user just configure the environment, upload code and watch it run.</p>
+<p>AWS use cases includes:</p>
+<ul>
+<li>Automated backups</li>
+<li>Event-driven log analysis</li>
+<li>Event-driven transformations</li>
+<li>Internet of Things</li>
+<li>operating serverless websites</li>
+</ul>
+<p>Also can use Amazon Lambda and Amazon Kinesis to process real-time streaming data for </p>
+<ul>
+<li>application activity tracking</li>
+<li>transaction order processing</li>
+<li>clickstream analysis</li>
+<li>data cleamsing metrics</li>
+<li>generation log filtering</li>
+<li>Indexing social media analysis</li>
+<li>device telemetry and monitoring</li>
+</ul>
+<h2 id="AWS-Elastic-Beanstalk"><a href="#AWS-Elastic-Beanstalk" class="headerlink" title="AWS Elastic Beanstalk"></a>AWS Elastic Beanstalk</h2><h3 id="Introduction-1"><a href="#Introduction-1" class="headerlink" title="Introduction"></a>Introduction</h3><p>What is Elastic Beanstalk?</p>
+<ul>
+<li><p>Platform as a Service, means that you have the whole infrastructure created for you</p>
+</li>
+<li><p>Allows quick deployment of your applications</p>
+</li>
+<li><p>Reduces management complexity</p>
+</li>
+<li><p>Keep control in your hands:</p>
+<ul>
+<li>Choose your instance</li>
+<li>Choose your database</li>
+<li>Set and adjust Auto Scaling</li>
+<li>Update your application</li>
+<li>Access server log files</li>
+<li>Enable HTTPS on Load Balancer</li>
+</ul>
+</li>
+<li><p>Supports a large range of platforms</p>
+<ul>
+<li>Packer Builder</li>
+<li>Single Container, Multicontainer, or Preconfigured Docker</li>
+<li>Go</li>
+<li>Java SE</li>
+<li>Java with Tomcat</li>
+<li>.NET on Windows Server with IIS</li>
+<li>Node.js</li>
+<li>PHP</li>
+<li>Python</li>
+<li>Ruby</li>
+</ul>
+</li>
+<li><p>Easy Delpoyment and update</p>
+<p><img src="https://raw.githubusercontent.com/Kiwitwitter/hexo-storage/master/img/Screen%20Shot%202020-01-19%20at%204.40.27%20PM.jpg" alt></p>
+</li>
+</ul>
+<h3 id="Components"><a href="#Components" class="headerlink" title="Components"></a>Components</h3><ul>
+<li><p>Elastic Beanstalk provides:</p>
+<p><img src="https://raw.githubusercontent.com/Kiwitwitter/hexo-storage/master/img/Screen%20Shot%202020-01-19%20at%204.37.49%20PM.jpg" alt></p>
+</li>
+</ul>
+<h2 id="Amazon-Simple-Notification-Service"><a href="#Amazon-Simple-Notification-Service" class="headerlink" title="Amazon Simple Notification Service"></a>Amazon Simple Notification Service</h2><h3 id="Instroduction"><a href="#Instroduction" class="headerlink" title="Instroduction"></a>Instroduction</h3><p>Amazon Simple Notification Service:</p>
+<ul>
+<li><p>Flexible, fully managed pub/sub messaging and mobile communications service</p>
+</li>
+<li><p>SNS also coodinates the delivery of messages to subscribing endpoints and clients</p>
+</li>
+<li><p>Easy to setup, operate and send reliable communications</p>
+</li>
+</ul>
+<p>Amazon SNS pub/sub Messaging and Mobile Notifications:</p>
+<p><img src="https://raw.githubusercontent.com/Kiwitwitter/hexo-storage/master/img/Screen%20Shot%202020-01-19%20at%205.08.28%20PM.jpg" alt></p>
+<h2 id="Amazon-CloudWatch"><a href="#Amazon-CloudWatch" class="headerlink" title="Amazon CloudWatch"></a>Amazon CloudWatch</h2><h3 id="Service-Introduction-3"><a href="#Service-Introduction-3" class="headerlink" title="Service Introduction"></a>Service Introduction</h3><p>Amazon CloudWatch monitors your Amazon Web Services (AWS) resources and the applications you run on AWS in real time, including:</p>
+<ul>
+<li>Collect and track metrics</li>
+<li>Collect and monitor log files</li>
+<li>Set alarms</li>
+<li>Automatically react to changes</li>
+</ul>
+<h3 id="Overview-3"><a href="#Overview-3" class="headerlink" title="Overview"></a>Overview</h3><p><img src="https://raw.githubusercontent.com/Kiwitwitter/hexo-storage/master/img/Screen%20Shot%202020-01-19%20at%206.03.26%20PM.jpg" alt></p>
+<h3 id="Use-Cases-1"><a href="#Use-Cases-1" class="headerlink" title="Use Cases"></a>Use Cases</h3><ul>
+<li>Respond to state changes in your AWS resources</li>
+<li>Automatically invoke an AWS Lambda function to update DNS entries when a event notifies that Amazon EC2 instance enters the running state</li>
+<li>Direct specific API records from CloudTrail to a Kinesis stream for detailed analysis of potential security or availability risks</li>
+<li>Take a snapshot of an Amazon EBS volume on a schedule</li>
+<li>Log S3 Object Level Operation using CloudWatch Events</li>
+</ul>
+<h3 id="CloudWatch-Components"><a href="#CloudWatch-Components" class="headerlink" title="CloudWatch Components"></a>CloudWatch Components</h3><h4 id="Metrics"><a href="#Metrics" class="headerlink" title="Metrics"></a>Metrics</h4><ul>
+<li><p>Data about the performance of the systems</p>
+</li>
+<li><p>Represents a time-ordered set of data points that are published to CloudWatch</p>
+</li>
+<li><p>By default, sevral services provide free metrics for resources</p>
+<p>Such as Amazon EC2 insatcne, Amazon EBS volumes, Amazon RDS DB instances</p>
+</li>
+<li><p>Publish your own application metrics</p>
+</li>
+<li><p>Load all the metrics in your account for search, graphing, and alarms</p>
+</li>
+</ul>
+<h4 id="Alarms"><a href="#Alarms" class="headerlink" title="Alarms"></a>Alarms</h4><ul>
+<li><p>Watch a single metric</p>
+</li>
+<li><p>Performs one or more actions</p>
+<p>Based on the value of the metric relative to a threshold over a number of time periods</p>
+</li>
+<li><p>The action can be:</p>
+<ul>
+<li>An Amazon EC2 action</li>
+<li>The Auto Scaling action</li>
+<li>A notification sent to an Amazon SNS topic</li>
+</ul>
+</li>
+<li><p>Invokes actions for sustained state changes only</p>
+</li>
+</ul>
+<h4 id="Events"><a href="#Events" class="headerlink" title="Events"></a>Events</h4><ul>
+<li>New real-time stream of system events that describe changes in AWS resources</li>
+<li>Use simple rules to match events and route them to one or more target functions or streams</li>
+<li>Aware of operational changes as they occur</li>
+<li>Responds to these operational changes amd takes corrective action as necessary</li>
+<li>Schedule automated actions that self-trigger at certain times using Cron or rate expressions</li>
+</ul>
+<h4 id="Logs"><a href="#Logs" class="headerlink" title="Logs"></a>Logs</h4><ul>
+<li>Monitor and troubleshoot systems and applications using existing log files<ul>
+<li>Monitor logs for specific phrases, values, or patterns</li>
+</ul>
+</li>
+<li>Retrieve the associated log data from CloudWatch Logs</li>
+<li>Includes an installable agent for Ubuntu, Amazon Linux, and WIndows at no additional charge</li>
+<li>Monitor Logs from Amazon EC2 Instances in Real-time</li>
+<li>Monitor AWS ClouTrail Logged Events</li>
+<li>Archive Log Data, your metrics can be stored durably in CloudWatch as CloudWatch log:<ul>
+<li>Admins and other parties can review CloudWatch Logs directly in the AWS Management Console</li>
+<li>Logs can be stored in Amazon S3, to be accessed by other services or another user.</li>
+<li>Logs can be streamed in real time to data-processing solutions like Amazon Kinesis Streams or AWS Lambda.</li>
+</ul>
+</li>
+</ul>
+<h4 id="Dashboards"><a href="#Dashboards" class="headerlink" title="Dashboards"></a>Dashboards</h4><ul>
+<li>Customizable home pages in the CLoudWatch console to monitor your resources in a single view<ul>
+<li>Even those resources that are spread acress different regions</li>
+</ul>
+</li>
+<li>Create customized views of the metrics and alarms for your AWS resources.<ul>
+<li>Each dashboard can display multiple metrics, and can be accessorized with text and images</li>
+</ul>
+</li>
+<li>Create dashvoards by using the console, the AWS CLI, or by using the <strong>PutDashboard</strong> API</li>
+</ul>
+<h2 id="Amazon-CloudFront"><a href="#Amazon-CloudFront" class="headerlink" title="Amazon CloudFront"></a>Amazon CloudFront</h2><h3 id="AWS-Global-Infrastructure"><a href="#AWS-Global-Infrastructure" class="headerlink" title="AWS Global Infrastructure"></a>AWS Global Infrastructure</h3><p>AWS CLoudFront uses a global network of more than 80 locations and more than 10 regional edge caches for content delivery. The edge locations are located globally around the world, and frequently increases. </p>
+<h3 id="CloudFront-overview"><a href="#CloudFront-overview" class="headerlink" title="CloudFront overview"></a>CloudFront overview</h3><ul>
+<li>Global, Growing Network</li>
+<li>Secure Content at the Edge</li>
+<li>Deep Integration with Key AWS Services</li>
+<li>High Performance</li>
+<li>Cost Effective</li>
+<li>Easy to Use</li>
+</ul>
+<h3 id="Creating-and-configuring-a-CDN"><a href="#Creating-and-configuring-a-CDN" class="headerlink" title="Creating and configuring a CDN"></a>Creating and configuring a CDN</h3><p>When creating a CDN, you need to choose what type you want to create. RTMP is used for video content streaming, and Web is designed to use it by usual content delivery that is not a video stream. </p>
+<p>Then, you must specify at least one origin and one behavior. </p>
+<ul>
+<li>Basically, the origin can be your S3 bucket or any application that you run even outside AWS. You can put the IP address of your web server, the load balancer endpoints taht can be reachable over the Internet.</li>
+<li>The behavior basically matches: “What is the URL pattern that you want to associate woth that origin?”</li>
+<li>User can always add more origins in the future, but must specify one during creation.</li>
+<li>User can even use other AWS services or AWS command line interface to automate the creation of new distributions for new environment. </li>
+</ul>
+<h3 id="Use-cases"><a href="#Use-cases" class="headerlink" title="Use cases"></a>Use cases</h3><ul>
+<li>static asset caching</li>
+<li>live and on-demand video streaming</li>
+<li>security and DDoS protection</li>
+<li>API acceleration</li>
+<li>Software Distribution</li>
+</ul>
+<h2 id="AWS-CloudFormation"><a href="#AWS-CloudFormation" class="headerlink" title="AWS CloudFormation"></a>AWS CloudFormation</h2><h3 id="Service-Introduction-4"><a href="#Service-Introduction-4" class="headerlink" title="Service Introduction"></a>Service Introduction</h3><ul>
+<li><p>AWS CloudFormation <strong>simplifies</strong> the task of <strong>repeatedly</strong> and <strong>predictably</strong> creating groups of related resources that power your applications. CloudFormation is all about resource provisioning.</p>
+</li>
+<li><p>There are three method to call the APIs: the AWS management console, the AWS CLI, the AWS SDK/API. Using one of the three methods, we can construct virtual environment for our workploads. </p>
+</li>
+<li><p>We use API calls such as CreateVPC to construct a VPC, LaunchInstances to create a new EC2 instance.</p>
+</li>
+<li><p>CloudFormation is a:</p>
+<ul>
+<li>Fully-managed service</li>
+<li>Create, update and delete resources in stacks</li>
+</ul>
+</li>
+</ul>
+<h3 id="Overview-4"><a href="#Overview-4" class="headerlink" title="Overview"></a>Overview</h3><ul>
+<li><p>The big picture of this process is:</p>
+<ul>
+<li>Confirmation reads template files (the instructions on what resources to actually go ahead and provisions)</li>
+<li>CloudFormation constructs the resources listed in the template file and the output of this process is your environment, which is known as a stack.</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/Kiwitwitter/hexo-storage/master/img/Screen%20Shot%202020-01-20%20at%2012.07.41%20AM.jpg" alt></p>
+</li>
+<li><p>You can interact with the service through the management console or build scripts to automate CloudFormation actions.</p>
+</li>
+</ul>
+<h4 id="Stacks"><a href="#Stacks" class="headerlink" title="Stacks:"></a>Stacks:</h4><ul>
+<li>Resources generated</li>
+<li>Unit of deployment</li>
+<li>Create Stack, Update Stack by rerunning a modified template, Delete Stack</li>
+<li>Most organizations modularize stacks by creating separate templates for networking, security and applications.</li>
+</ul>
+<h4 id="Templates"><a href="#Templates" class="headerlink" title="Templates:"></a>Templates:</h4><ul>
+<li><p>describe the resources to provision</p>
+</li>
+<li><p>These are text files written in JSON or YAML format</p>
+</li>
+<li><p>As an added benefit, if you provisioned your environment using templates, then your template become a form of documentation for your environment.</p>
+</li>
+<li><p>Template includes:</p>
+<ul>
+<li>The same information you would specify if you built the environment mannually through the console</li>
+<li>Template does use specific formatting constructs, but the resource and property information is the same</li>
+<li>You don’t have to list your resources in the exact order of the creation, we can simply use <strong>DependsOn</strong> attribute to control the order CloudFormation will create the resources, so that we can build a sequence of events, like Database server needs to be created before a web server.</li>
+</ul>
+</li>
+<li><p>Parameters in the template can be used to control the stacks generated. E.g. Parameter one creates the development stack, Parameter two will generate the product stack.</p>
+</li>
+<li><p><strong>Infrastructure as Code</strong>:</p>
+<p>Means you can simply control your infrastructure through software code like a template, which is flexible. </p>
+<p>You can change it and also keep different versions of the same template,.</p>
+<p>Organizations that reply on CloudFormation build out template libraries much as they do code repositories for applications.</p>
+</li>
+</ul>
+<h4 id="Two-critical-requirements-for-CloudFormation"><a href="#Two-critical-requirements-for-CloudFormation" class="headerlink" title="Two critical requirements for CloudFormation:"></a>Two critical requirements for CloudFormation:</h4><ul>
+<li>Templates have to be correct, otherwise CloudFormation stops</li>
+<li>The user who run the CloudFormation msut have the permission to all services referenced in the template. </li>
+</ul>
 ]]></content>
       <tags>
         <tag>study</tag>
