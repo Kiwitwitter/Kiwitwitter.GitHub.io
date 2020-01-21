@@ -1,6 +1,214 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>AWS Cloud Practitioner Essentials, Architecture</title>
+    <url>/2020/01/20/aws-cloud-practitioner-3/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h2 id="The-AWS-Well-Architectured-Framework"><a href="#The-AWS-Well-Architectured-Framework" class="headerlink" title="The AWS Well-Architectured Framework"></a>The AWS Well-Architectured Framework</h2><h3 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h3><ul>
+<li>Access and improve architectures</li>
+<li>Understand how design decisions impact business</li>
+<li>Learn the five pillars and design principles</li>
+</ul>
+<h3 id="5-Pillars"><a href="#5-Pillars" class="headerlink" title="5 Pillars"></a>5 Pillars</h3><h4 id="In-general"><a href="#In-general" class="headerlink" title="In general:"></a>In general:</h4><ul>
+<li>Security</li>
+<li>Reliability</li>
+<li>Performance efficiency</li>
+<li>Cost optimization</li>
+<li>Operational excellence</li>
+</ul>
+<h4 id="Security-Pillar"><a href="#Security-Pillar" class="headerlink" title="Security Pillar:"></a>Security Pillar:</h4><ul>
+<li><p>Identify and access management (IAM)</p>
+<p>Critical to ensure that only authorized and authenticated users are able to access your resources, and only in the manner you intend.</p>
+</li>
+<li><p>Detective controls</p>
+<p>Can be used to identify a potential security incident by considering approaches such as capturing or analyzing logs and integration auditing controls.</p>
+</li>
+<li><p>Infrastructure protection</p>
+<p>Ensures that systems and services within your architecture are protected against unintended and unauthorized access.</p>
+</li>
+<li><p>Data protection</p>
+<p>There are numerous approaches and methods to consider. Some of them include dara classification, encryption, protecting data at rest and in transit, data backup, and finally replication and recovery when needed.</p>
+</li>
+<li><p>Indicent response</p>
+<p>Will ensure that your architecture is updated to accommodate a timely investigation in recovery.</p>
+</li>
+<li><p><strong>Design Principles</strong>:</p>
+<ul>
+<li>Implement security at all layers</li>
+<li>Enable traceability</li>
+<li>Apply principle of least provilege</li>
+<li>Focus on securing your system</li>
+<li>Automate</li>
+</ul>
+</li>
+</ul>
+<h4 id="Reliability-Pillar"><a href="#Reliability-Pillar" class="headerlink" title="Reliability Pillar:"></a>Reliability Pillar:</h4><ul>
+<li><p>Recover from issues/failures</p>
+</li>
+<li><p>Apply best practices in:</p>
+<ul>
+<li><p>Foundations</p>
+<p>In order to achiveve reliability, your architecture and system must have a well-planned foundation in place that can handle changes in demand or with requirement, and also detect failure and automatically heal itself. </p>
+<p>Before architecting any system, foundational requirements that influence reliability should be in place.</p>
+</li>
+<li><p>Change management</p>
+<p>It’s important to fully understand and be aware of how change can affect your system.</p>
+<p>If you planned proactively and monitor your system, you can accommodate and adjust to change quickly and reliably. To ensure the system is reliable, it’s a key to anticipate, become aware and respond and prevent failures form happening. </p>
+</li>
+<li><p>Failure management</p>
+<p>In a cloud environment, you can take advantage of automation with monitoring, replace systems in your environment, and later troubleshoot failed systems, all at low cost, and all while it’s still being reliable</p>
+</li>
+</ul>
+</li>
+<li><p>Anticipate, respond, and prevent failures</p>
+</li>
+<li><p><strong>Design principles</strong>:</p>
+<ul>
+<li><p>Test recovery procedures</p>
+</li>
+<li><p>Automatically recover</p>
+</li>
+<li><p>Scale horizontally</p>
+<p>When you have a large service, it’s beneficial to replace it with multiple small resources to reduce the impact of a single resources to reduce the impact of a single point of failure on the overall system.</p>
+</li>
+<li><p>Stop guessing capacity</p>
+<p>In cloud environment, you have the ability to monitor demand and system utilization and automate the addition or removal of resources</p>
+</li>
+<li><p>Manage change in automation</p>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="Performance-Efficiency-Pillar"><a href="#Performance-Efficiency-Pillar" class="headerlink" title="Performance Efficiency Pillar:"></a>Performance Efficiency Pillar:</h4><ul>
+<li><p>Select customizable solutions</p>
+<p>Solutions vary based on the kind of workload you have. With AWS, resources are virtualized and allow you to customize your solutions in many different types and configurations</p>
+</li>
+<li><p>Review to continually innovate</p>
+<p>With review, you can continually innovate your solutions and take advantage of newer technologies that become available. </p>
+</li>
+<li><p>Monitor AWS services</p>
+<p>You need to monitor the performance to ensure that you can remediate any issues before customers are affected and become aware of them.</p>
+</li>
+<li><p>Consider the trade-offs</p>
+</li>
+<li><p><strong>Design Principles</strong>:</p>
+<ul>
+<li><p>Democratize advanced technologies</p>
+<p>Consume new knowledge and technologies as a service rather than having IT team figure out how to do it.</p>
+</li>
+<li><p>Go global in minutes</p>
+<p>Do global depploy with AWS for lower latency and better experience for customers, at a minial cost</p>
+</li>
+<li><p>Use a serverless architectures</p>
+<p>This remove the need to run and  maintain traditional servers for compute actibities, and also remove burden and can lower transactional costs</p>
+</li>
+<li><p>Experiment more often</p>
+<p>Carry out quick testing to enhance efficiency</p>
+</li>
+<li><p>Have mechanical sympathy</p>
+<p>Use technology approach that best aligns to what you’re trying to do.</p>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="Cost-Optimization-Pillar"><a href="#Cost-Optimization-Pillar" class="headerlink" title="Cost Optimization Pillar:"></a>Cost Optimization Pillar:</h4><ul>
+<li><p>Use cost-effective resources</p>
+<p>Make sure the system is using the right services, resources and configurations is one of the key parts to cost savings</p>
+</li>
+<li><p>Matching supply with demand</p>
+</li>
+<li><p>Increase expenditure awareness</p>
+<p>Being fully cognizant of what spending and cost drivers are happening with your business is critical. So having the ability to see, understand, and break down the current costs, predict future costs, and plan accordingly only enhances the cost optimization of your architecture in the cloud.</p>
+</li>
+<li><p>Optimize over time</p>
+</li>
+<li><p><strong>Design Principles</strong>:</p>
+<ul>
+<li><p>Adopt consumption omdel</p>
+</li>
+<li><p>Measure overall efficiency</p>
+<p>Measure the business output of the systems, and the costs associated woth delivery it, then take this measurement to uderstand how gains are made from increasing output and reducing cost.</p>
+</li>
+<li><p><strong>Reduce</strong> spending on data center operations</p>
+</li>
+<li><p>Analyze and attribute expenditure</p>
+<p>Accurately identidy the usage and cost of systems. Customers can measure their return on investment, which provides them the opportunities to optimize services and reduce costs.</p>
+</li>
+<li><p>Use managed service</p>
+<p>Use managed service to remove operational burden.</p>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="Operational-Excellence-Pillar"><a href="#Operational-Excellence-Pillar" class="headerlink" title="Operational Excellence Pillar:"></a>Operational Excellence Pillar:</h4><ul>
+<li>Manage and automate changes</li>
+<li>Respond to events</li>
+<li>Define the standards</li>
+</ul>
+<h2 id="Fault-Tolerance-and-High-Availability"><a href="#Fault-Tolerance-and-High-Availability" class="headerlink" title="Fault Tolerance and High Availability"></a>Fault Tolerance and High Availability</h2><p>Fault Tolerance refers to:</p>
+<ul>
+<li>Ability of a system to remain operational</li>
+<li>Built-in redundancy of a application’s component</li>
+</ul>
+<p>High Availability refers to:</p>
+<ul>
+<li>Systems are generally functioning and accessible</li>
+<li>Downtime is minimized</li>
+<li>Minimal human intervention is required</li>
+<li>Minimal up-front financial investment</li>
+</ul>
+<p>On premises vs AWS:</p>
+<table>
+<thead>
+<tr>
+<th>Traditional (On premises)</th>
+<th>AWS</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Expensive<br>Only mission-critical applications</td>
+<td>Multiple servers<br>Availability Zones<br>Regions<br>Fault Tolerant services</td>
+</tr>
+</tbody></table>
+<h3 id="High-Availability-Service-Tools"><a href="#High-Availability-Service-Tools" class="headerlink" title="High Availability Service Tools"></a>High Availability Service Tools</h3><ul>
+<li><p>Elastic Load Balancers</p>
+<p>ELB is a service that distributes incoming traffic or load amongst your instances. ELB can also send metrics to Amazon CloudWatch, which is a managed monitoring service.</p>
+<p>ELB can be a trigger and notify you of high latency or if servers are becoming over-utilized.</p>
+</li>
+<li><p>Elastic IP Addresses</p>
+<p>Elastic IP Addresses are useful in providing greater fault-tolerance for applications.</p>
+<p>Elastic IPs are static IP addresses designed for dynamic cloud computing. </p>
+<p>This tool allows you to mask a failure of an instance or software by allowing your user to use the same IP address with replacement resources.</p>
+</li>
+<li><p>Amazon Route 53</p>
+<p>This is used to translate domain names into IP addresses. </p>
+<p>It was developed to support simple routing, latency-based routing, health checks and DNS failover, and geolocation routing.</p>
+</li>
+<li><p>Auto Scaling</p>
+<p>Designed to assist user in building a flexible system that can adjust and be modified depending on changes in customer demand. </p>
+<p>With Auto Scaling, you can avoid limitations of manually creating new resources. Instead, you can create new resources on demand or have scheduled provisioning. This ensures that your applications and systems are always available no matter what the load is. </p>
+</li>
+<li><p>Amazon CloudWatch</p>
+<p>It collects and tracks your metrics of your applications. Another feature is that you have the ability to create and use your own custom metrics. If there is high latency or metrics that have passsed the set threshold, CloudWatch can adjust automatically to ensure high availability of your architecture.</p>
+</li>
+</ul>
+<h3 id="Fault-Tolerant-Tools"><a href="#Fault-Tolerant-Tools" class="headerlink" title="Fault Tolerant Tools"></a>Fault Tolerant Tools</h3><ul>
+<li><p>Amazon Simple Queue Service</p>
+<p>Can be used as the backbone of the fault-tolerant application. It is highly reliable distributed messaging system. SQS can help you ensure that your queue is always available.</p>
+</li>
+<li><p>Amazon Simple Storage Service</p>
+<p>Provides high durable and fault-tolerant data storage. S3 stores all of the data redundantly on multiple different devices across multiple facilities in a region.</p>
+</li>
+<li><p>Amazon Relational Database Service</p>
+<p>Provides high availability and fault tolerance by offering several features tp enhance the reliability of your critical databases.</p>
+</li>
+</ul>
+]]></content>
+      <tags>
+        <tag>study</tag>
+        <tag>aws_cloud_practitioner</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>AWS Cloud Practitioner, AWS Integrated Services</title>
     <url>/2020/01/12/aws-cloud-practitioner-2/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h2 id="Application-Load-Balancer"><a href="#Application-Load-Balancer" class="headerlink" title="Application Load Balancer"></a>Application Load Balancer</h2><h3 id="Service-Introduction"><a href="#Service-Introduction" class="headerlink" title="Service Introduction"></a>Service Introduction</h3><ul>
