@@ -68,6 +68,309 @@
       
         
 
+<article id="post-aws-cloud-practitioner-4" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2020/01/21/aws-cloud-practitioner-4/">AWS Cloud Practitioner, AWS Security</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2020/01/21/aws-cloud-practitioner-4/" class="article-date">
+  <time datetime="2020-01-22T07:32:50.000Z" itemprop="datePublished">2020-01-21</time>
+</a>
+        
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <h2 id="The-Shared-Responsibility-Model"><a href="#The-Shared-Responsibility-Model" class="headerlink" title="The Shared Responsibility Model"></a>The Shared Responsibility Model</h2><p>Both the user and AWS should be responsible for the security of the service running in AWS. </p>
+<p>We divide the security into 7 levels, and create a shared security model. Some levels are user fully responsible for, some levels are AWS fully responsible for. </p>
+<p>Model stack:</p>
+<table>
+<thead>
+<tr>
+<th>User Data</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Application</strong></td>
+</tr>
+<tr>
+<td><strong>Guest OS</strong></td>
+</tr>
+<tr>
+<td><strong>Hyperviser</strong></td>
+</tr>
+<tr>
+<td><strong>Network</strong></td>
+</tr>
+<tr>
+<td><strong>Physical</strong></td>
+</tr>
+</tbody></table>
+<ul>
+<li><p>Physical</p>
+<p>This is iron and concrete, a barbed-wire fence. AWS don’t give access to any third party to the service or data centers.</p>
+</li>
+<li><p>Network</p>
+<p>AWS fully responsible for this, AWS run the network, proprietary networking protocols designed to allow security of our systems, so elements like VPC can work at scale, velocity, and designed to protect traffic.</p>
+</li>
+<li><p>Hypervisor</p>
+<p>AWS hypervisor uses a Xen-based hypervisor, and AWS made a lot of specific changes to the hypervisor that make it secure and scalable.</p>
+</li>
+<li><p>Guest OS, Application, User data</p>
+<p>When user choose the operating system, user can choose whatever operating systems they use and whatever applications that they are using inside the operating system. AWS has no visibility to that, and the data are totally protected by user’s access key secret and how they encrypt it. </p>
+</li>
+</ul>
+<h2 id="Identity-and-Access-Management"><a href="#Identity-and-Access-Management" class="headerlink" title="Identity and Access Management"></a>Identity and Access Management</h2><h3 id="User"><a href="#User" class="headerlink" title="User"></a>User</h3><p>In the case of AWS, user is a permanent named operator. Could be human, or a machine. The Idea is that my credentials are permanent, and they stay with that named user util there is a forced rotation , whether is’a name and password, access key, secret key combination.</p>
+<h3 id="Group"><a href="#Group" class="headerlink" title="Group"></a>Group</h3><p>A collection of users. Group can have many users, users can belong to many groups.</p>
+<h3 id="Role"><a href="#Role" class="headerlink" title="Role"></a>Role</h3><p>In AWS, a role is not a permission, but an authentication method. A role is an operator, could be human, or a machine. The key part is the credentials with a role are temporary. </p>
+<h3 id="Policy-Docs"><a href="#Policy-Docs" class="headerlink" title="Policy Docs"></a>Policy Docs</h3><p>Permissions, in every cases, happens in a seperate object known as the policy document. The policy document is a JSON document. It attaches either directly to a permanent named user or a group of users, or it can be attached directly to a role. The policy document lists the specific API or wildcard group of APIs that I am white-listing, or allowing, against which resources.</p>
+<p><strong>Authentication and Authorization</strong>: Authentication is verify who you are, authorization is to verify if you have the permission to do certain activities.</p>
+<h2 id="Amazon-Inspector"><a href="#Amazon-Inspector" class="headerlink" title="Amazon Inspector"></a>Amazon Inspector</h2><h3 id="IT-Security-Challenges"><a href="#IT-Security-Challenges" class="headerlink" title="IT Security Challenges"></a>IT Security Challenges</h3><p>IT scurity matters, and securing IT infrastructure is:</p>
+<ul>
+<li>Complex</li>
+<li>Expensive</li>
+<li>Time consuming - build/configure.maintain</li>
+<li>Difficult to track all the changes in IT environment</li>
+<li>Hard to do effectively</li>
+</ul>
+<h3 id="Introducing-Amazon-Inspector"><a href="#Introducing-Amazon-Inspector" class="headerlink" title="Introducing Amazon Inspector"></a>Introducing Amazon Inspector</h3><ul>
+<li>Assesses applications for:<ul>
+<li>Vulnerabilities</li>
+<li>Deviations from best practices</li>
+</ul>
+</li>
+<li>Produces a detailed report with:<ul>
+<li>Security findings</li>
+<li>Prioritzed steps for remediation</li>
+</ul>
+</li>
+</ul>
+<h3 id="Amazon-Inspector-Benefits"><a href="#Amazon-Inspector-Benefits" class="headerlink" title="Amazon Inspector Benefits:"></a>Amazon Inspector Benefits:</h3><ul>
+<li>Helps identify security vulnerabilities as well as deviations from security best practices in applications, both before they are deployed and while they are running in a production environment.</li>
+<li>Amazon Inspector is agent-based, API-driven, and delivered as a service. This makes it easy for you to build right into your existing DevOps process, decentralizing and automating vulnerability assessment an integral part of the deployment process</li>
+<li>The service helps reduce the risk of introducing security issues during development and deployment by automating the security vulnerabilities. </li>
+<li>AWS continuously assesses the AWS environment and updates a knowledge base of security best practices and rules. </li>
+<li>Amazon Inspector gives security teams and auditors visibility into security testing during application development.</li>
+<li>Amazon Inspector allows you to define standards and best practices for your applications and validate adherence to these standards.</li>
+</ul>
+<h3 id="Amazin-Inspector-Accessing"><a href="#Amazin-Inspector-Accessing" class="headerlink" title="Amazin Inspector Accessing:"></a>Amazin Inspector Accessing:</h3><ul>
+<li>Amazon Inspector Console</li>
+<li>AWS software development kits(SDKs)</li>
+<li>Amazon Inspector HTTPS API</li>
+<li>AWS command line tools</li>
+</ul>
+<h3 id="Built-in-rules"><a href="#Built-in-rules" class="headerlink" title="Built-in rules"></a>Built-in rules</h3><ul>
+<li>Includes a knowledge base with hundreds of rules that mapped to:<ul>
+<li>Common Security compliance standards</li>
+<li>Vulnerability definations</li>
+</ul>
+</li>
+<li>Regularity updated by AWS security researchers</li>
+</ul>
+<h2 id="AWS-Shield"><a href="#AWS-Shield" class="headerlink" title="AWS Shield"></a>AWS Shield</h2><p>AWS shield is a <strong>Managed Distributed Denial of Service</strong> protection service that safeguards applications running on AWS. The service provides always-on detection and automatic inline mitigations that minimize application downtime and latency, so there is no need to engage AWS Support for DDOS protection.</p>
+<h3 id="Differences-between-DDoS-and-DoS"><a href="#Differences-between-DDoS-and-DoS" class="headerlink" title="Differences between DDoS and DoS"></a>Differences between DDoS and DoS</h3><h4 id="DoS"><a href="#DoS" class="headerlink" title="DoS"></a>DoS</h4><p>DoS attack is a deliberate attemot to make your website or application unavailable to user-like flooding it with network traffic. Attackers use a variety of techniques that consume large amounts of network bandwidth or tie up other sysetm resources, disrupting access for legitimate users.</p>
+<p>In short, a line attacker uses a single source to execute a DoS attck against a target.</p>
+<h4 id="DDoS"><a href="#DDoS" class="headerlink" title="DDoS"></a>DDoS</h4><p>Attacker uses multiple sources to orchestrate an attack against a target. Sources may include distributed groups of malware infected computers, routers, IoT devices, and other endpoints.</p>
+<p>DDoS are typically launched form a botnet of compromised computers or Internet devices. The objective to knock the targeted website or application offline for a period of time, disrupting availability for legitimate uses.</p>
+<h4 id="Difficulties-of-mitigating-DDoS-attack"><a href="#Difficulties-of-mitigating-DDoS-attack" class="headerlink" title="Difficulties of mitigating DDoS attack:"></a>Difficulties of mitigating DDoS attack:</h4><ul>
+<li>Protection is complex to set up, and very often, it involves re-architecting your application</li>
+<li>Bandwidth issue may happen due to scalability issues if you opt to tackle mitigation from an on-oremises data center</li>
+<li>May need manual intervention to initiate mitigation</li>
+<li>In turn, this deplays resolution and increases network latency</li>
+<li>Due to the size, duration, and complex nature of mitigation systems, it can become cost-prohibitive</li>
+</ul>
+<h3 id="AWS-Shield-tiers"><a href="#AWS-Shield-tiers" class="headerlink" title="AWS Shield tiers"></a>AWS Shield tiers</h3><h4 id="AWS-Shield-standard"><a href="#AWS-Shield-standard" class="headerlink" title="AWS Shield standard"></a>AWS Shield standard</h4><ul>
+<li>Automatically protection<ul>
+<li>Any AWS resource</li>
+<li>Any AWS region</li>
+</ul>
+</li>
+<li>Quick Detection - Always on</li>
+<li>Inline attack mitigation<ul>
+<li>Built-in automated mitigation techniques</li>
+<li>Avoids latency impact</li>
+</ul>
+</li>
+<li>Self Service<ul>
+<li>No need to engage AWS Support</li>
+</ul>
+</li>
+</ul>
+<h4 id="AWS-Shield-Advance"><a href="#AWS-Shield-Advance" class="headerlink" title="AWS Shield Advance"></a>AWS Shield Advance</h4><ul>
+<li>Specialized support</li>
+<li>Advanced attack mitigation</li>
+<li>Visibility and attack notification</li>
+<li>Always-on monitoring<ul>
+<li>Amazon Route 53, Amazon CloudFront, Elastic Load Balancer, Elastic IP</li>
+</ul>
+</li>
+<li>Enhance detection</li>
+<li>DDoS cost protection</li>
+</ul>
+<h3 id="AWS-Shield-benefits"><a href="#AWS-Shield-benefits" class="headerlink" title="AWS Shield benefits"></a>AWS Shield benefits</h3><ol>
+<li>Seamless integration and deployment</li>
+<li>Cost Efficient</li>
+<li>Customizable protection</li>
+</ol>
+<h3 id="AWS-Shield-Protections"><a href="#AWS-Shield-Protections" class="headerlink" title="AWS Shield Protections"></a>AWS Shield Protections</h3><ol>
+<li>Protecing DNS<ul>
+<li>Using Route 53<ul>
+<li>AWS Shield Standard - Hosted zones</li>
+<li>AWS Shield Advanced - Attack visibility, DRT support</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Protection web applications and APIs<ul>
+<li>Using Amazon CloudFront or Application Load Balancer<ul>
+<li>AWS Shield Standard - Always-on, scrubs bad traffic</li>
+<li>AWS Shield Advanced - DRT support, traffic engineering, application layer protection</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Protectin other applications<ul>
+<li>Using Elastic IP Address<ul>
+<li>AWS Shield Standard - Built-in techniques</li>
+<li>AWS Shield Advanced - Custom mitigation profiles, additional bandwidth</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="AWS-Compliance"><a href="#AWS-Compliance" class="headerlink" title="AWS Compliance"></a>AWS Compliance</h2><h3 id="AWS-security-information"><a href="#AWS-security-information" class="headerlink" title="AWS security information"></a>AWS security information</h3><p>AWS shares security information by:</p>
+<ul>
+<li>Obtaining industry certifications</li>
+<li>Publishing security and control practices</li>
+<li>Compliance reports</li>
+</ul>
+<h3 id="Assurance-programs"><a href="#Assurance-programs" class="headerlink" title="Assurance programs"></a>Assurance programs</h3><p>AWS provides compliance information and resources:</p>
+<ul>
+<li>Certification/attestations</li>
+<li>Legal/regulatory support</li>
+<li>Alignments/frameworks</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/Kiwitwitter/hexo-storage/master/img/Screen%20Shot%202020-01-23%20at%201.01.34%20AM.jpg" alt></p>
+<h3 id="AWS-risk-and-compliance-programs"><a href="#AWS-risk-and-compliance-programs" class="headerlink" title="AWS risk and compliance programs"></a>AWS risk and compliance programs</h3><ul>
+<li>Includes:<ul>
+<li>Criminal Justince Information Service (CJIS)</li>
+<li>Cloud Security Alliance (CSA)</li>
+<li>Family Educational Rights and Privacy Act (FERPA)</li>
+<li>Health Insurance Portability and Accountability Act (HIPAA)</li>
+<li>Motion Picture Association of America (MPAA)</li>
+</ul>
+</li>
+<li>Help customers:<ul>
+<li>Document a complete control and governance framework</li>
+<li>Deploy solutions that meet several industry-specific standards</li>
+</ul>
+</li>
+</ul>
+<h3 id="Components-of-AWS-compliance"><a href="#Components-of-AWS-compliance" class="headerlink" title="Components of AWS compliance"></a>Components of AWS compliance</h3><ul>
+<li>Risk management</li>
+<li>Control environment</li>
+<li>Information security</li>
+</ul>
+<h4 id="Risk-management-foundation"><a href="#Risk-management-foundation" class="headerlink" title="Risk management foundation"></a>Risk management foundation</h4><p>AWS management established:</p>
+<ul>
+<li>Business plan:<ul>
+<li>Include risk management</li>
+<li>Re-evaluated at list biannually</li>
+</ul>
+</li>
+<li>Process:<ul>
+<li>Identify risks</li>
+<li>Implement appropiate measures</li>
+<li>Assess various internal/external risks</li>
+</ul>
+</li>
+</ul>
+<h4 id="Risk-management-Framework"><a href="#Risk-management-Framework" class="headerlink" title="Risk management Framework"></a>Risk management Framework</h4><p>AWS compliance and security teams:</p>
+<ul>
+<li>Established framework and policies</li>
+<li>Maintain security policy</li>
+<li>Provide security training</li>
+<li>Perform application security reviews<ul>
+<li>Confidentially, integrity, and availability of data</li>
+<li>Conformance to IS Policy</li>
+</ul>
+</li>
+</ul>
+<h4 id="Risk-management-at-work"><a href="#Risk-management-at-work" class="headerlink" title="Risk management at work"></a>Risk management at work</h4><ul>
+<li>AWS security scans for vulnerabilities and notifies appropiate parties to remediate identified vulnerabilities </li>
+<li>Customers request permission to conduct scans of their cloud infrastrcuture</li>
+<li>Independent security firms regularly perform vulnerability threat assessments</li>
+<li>Findings/recommendations categorized and delivered to AWS leadership</li>
+</ul>
+<h3 id="Control-environment"><a href="#Control-environment" class="headerlink" title="Control environment"></a>Control environment</h3><ul>
+<li>Includes policies, processes, and control activities to secure the delivery of AWS service offerings</li>
+<li>Supports the operating effectiveness of AWS control framework</li>
+<li>Integrates cloud-specific controls</li>
+<li>Applies leading industry practices</li>
+</ul>
+<h3 id="Information-security"><a href="#Information-security" class="headerlink" title="Information security"></a>Information security</h3><ul>
+<li>Designed to protect<ul>
+<li>Confidentiality</li>
+<li>Integrity</li>
+<li>Availability </li>
+</ul>
+</li>
+<li>Publishes security whitepaper</li>
+</ul>
+<h3 id="Customer-compliance"><a href="#Customer-compliance" class="headerlink" title="Customer compliance"></a>Customer compliance</h3><ul>
+<li>Review trusted information and document compliance requirements</li>
+<li>Design and implement control objectives that meet compliance requirements</li>
+<li>Identify and document controls owned by outside parties</li>
+<li>Verify all control objectives are met and all key controls are designed and operating effectively</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.kiwitwitter.com/2020/01/21/aws-cloud-practitioner-4/" data-id="ck5qj7fe80000p0p4acx3eckp"
+         class="article-share-link">Share</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/aws-cloud-practitioner/" rel="tag">aws_cloud_practitioner</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/study/" rel="tag">study</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+      
+        
+
 <article id="post-aws-cloud-practitioner-3" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
