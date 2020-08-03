@@ -68,6 +68,167 @@
       
         
 
+<article id="post-AwsdCertifiedDeveloperAssociate-1" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2020/08/02/AwsdCertifiedDeveloperAssociate-1/">Aws Certified Developer Associate, ELBs and ASGs</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2020/08/02/AwsdCertifiedDeveloperAssociate-1/" class="article-date">
+  <time datetime="2020-08-03T05:53:02.000Z" itemprop="datePublished">2020-08-02</time>
+</a>
+        
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <h2 id="Elastic-Load-Balacing-ELB-Overview"><a href="#Elastic-Load-Balacing-ELB-Overview" class="headerlink" title="Elastic Load Balacing (ELB) Overview"></a>Elastic Load Balacing (ELB) Overview</h2><h3 id="What-is-Load-balancing"><a href="#What-is-Load-balancing" class="headerlink" title="What is Load balancing?"></a>What is Load balancing?</h3><ul>
+<li>Load balancers are servers that forward internet traffic to multiple servers (EC2 Instances) downstream.</li>
+</ul>
+<h3 id="Why-use-a-load-balancer"><a href="#Why-use-a-load-balancer" class="headerlink" title="Why use a load balancer?"></a>Why use a load balancer?</h3><ul>
+<li>Spread load across multiple downstream instances</li>
+<li>Expose a single point of access (DNS) to your application</li>
+<li>Seamlessly handle failures of downstream insatnces</li>
+<li>Do regular health checks to your instances</li>
+<li>Provide SSL termination (HTTPS) for your websites</li>
+<li>Enforce stickiness with cookies</li>
+<li>High availabilities across zones</li>
+<li>Separate public traffic from private traffic</li>
+</ul>
+<h3 id="Why-use-an-EC2-Load-Balancer"><a href="#Why-use-an-EC2-Load-Balancer" class="headerlink" title="Why use an EC2 Load Balancer?"></a>Why use an EC2 Load Balancer?</h3><ul>
+<li>An ELB (EC2 Load Balancer) is a managed load balancer<ul>
+<li>AWS guarantees that it will be working</li>
+<li>AWS takes care of upgrades, maintenance, high availability</li>
+<li>AWS provides only a few configuration knobs</li>
+</ul>
+</li>
+<li>It costs less to setup your own load balancer but it will be a lot more effort on your end</li>
+<li>It is integrated with many AWS offerings / services</li>
+</ul>
+<h3 id="Types-of-Load-Balancers-on-AWS"><a href="#Types-of-Load-Balancers-on-AWS" class="headerlink" title="Types of Load Balancers on AWS"></a>Types of Load Balancers on AWS</h3><ul>
+<li><p>AWS has three kinds of Load Balancers:</p>
+<ol>
+<li>Classic Load Balancer (v1 - Old generation)</li>
+<li>Application Load Balancer (v2 - New generation)</li>
+<li>Network Load Balancer (v2 - New generation)</li>
+</ol>
+</li>
+<li><p>Overall, it is recommended to use the newer / v2 generation load balancers as they provide more features. </p>
+</li>
+<li><p>You can setup internal (private) or external (public ) ELBs</p>
+</li>
+</ul>
+<h3 id="Health-Checks"><a href="#Health-Checks" class="headerlink" title="Health Checks"></a>Health Checks</h3><ul>
+<li>Health checks are crucial for load balancers because this enable thre load balancer to know if instancers it forwards traffic to are available to reply to requests</li>
+<li>The health check is done on a port and a route, usually /health</li>
+<li>If response if not 200, the instance is unhealthy.</li>
+</ul>
+<h3 id="Good-to-Knows"><a href="#Good-to-Knows" class="headerlink" title="Good to Knows"></a>Good to Knows</h3><ul>
+<li>Classic Load Balancers are deprecated</li>
+<li>CLB, ALB, NLB support SSL certificated and provide SSL termination</li>
+<li>LBs can scale out, but not instantaneously, need to contact AWS for a warm-up</li>
+<li>Any LB has a static host name, Do not resolve and use underlying IP</li>
+<li>Troubleshooting:<ol>
+<li>4xx errors are clients induced errors</li>
+<li>5xx errors are application induced errors</li>
+<li>LB errors 503 means at capacity or no registered target</li>
+<li>If the LB can’t connect to your application, check you security group</li>
+</ol>
+</li>
+<li>Monitoring<ol>
+<li>ELB access logs will log all access request,</li>
+<li>CloudWatch Metrics will give user aggregated statistics</li>
+</ol>
+</li>
+</ul>
+<h3 id="Application-load-balancer-v2"><a href="#Application-load-balancer-v2" class="headerlink" title="Application load balancer (v2)"></a>Application load balancer (v2)</h3><ul>
+<li>ALB (Layer 7) allows to do:<ol>
+<li>Load balancing to multiple HTTP applications across macchines (target groups)</li>
+<li>Load balancing to multiple applications on the same machine</li>
+<li>Load balancing based on route in URL</li>
+<li>Load balancing based on hostbane in URL</li>
+</ol>
+</li>
+<li>Basically, they’re awesome for micro services and container-based applications, Like Docker and Amazon ECS</li>
+<li>Has a port mapping feature to redirect to a dynamic port</li>
+<li>In comparison, we would need to create one Classic Load Balancer per application before, which is expensive and inefficient.</li>
+<li>Good to know:<ul>
+<li>Stickiness can be enabled at the target group level<ol>
+<li>Same request goes to the same instance</li>
+<li>Stickiness is directly generated by the ALB, not the application</li>
+</ol>
+</li>
+<li>ALB support HTTP/HTTPS and Websockets protocols</li>
+<li>The application server don’t see the IP of the client directly<ol>
+<li>The true IP of the client is inserted into header <strong>X-Forwarded-For</strong></li>
+<li>We can also get Port(<strong>X-Forwarded-Port</strong>) and proto(<strong>X-Forwarded-Proto</strong>)</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="Network-Load-Balancer-v2"><a href="#Network-Load-Balancer-v2" class="headerlink" title="Network Load Balancer (v2)"></a>Network Load Balancer (v2)</h3><ul>
+<li>Network Load Balancer (Layer 4) allows to do:<ol>
+<li>Forward TCP traffic to your instances</li>
+<li>Handle millions of request per seconds</li>
+<li>Support for static IP or elastic IP</li>
+<li>Less latency (~100 ms vs 400 ms for ALB)</li>
+</ol>
+</li>
+<li>NLB are mostly used for extreme performance and should not be the default load balancer you choose</li>
+<li>Overall, the creation process is the same as ALBs</li>
+<li>Good to know:<ul>
+<li>NLB directly sees the client IP</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.kiwitwitter.com/2020/08/02/AwsdCertifiedDeveloperAssociate-1/" data-id="ckde4f6up00007p9k396872fb"
+         class="article-share-link">Share</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/aws-certified-developer-associate/" rel="tag">aws_certified_developer_associate</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/study/" rel="tag">study</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+      
+        
+
 <article id="post-aws-cloud-practitioner-4" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
