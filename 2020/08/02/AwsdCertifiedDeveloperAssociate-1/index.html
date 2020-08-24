@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <title>
-    Aws Certified Developer Associate, ELBs and ASGs |
+    Aws Certified Developer Associate, ELBs |
     
     Peng&#39;s Blog</title>
   
@@ -39,7 +39,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Aws Certified Developer Associate, ELBs and ASGs
+      Aws Certified Developer Associate, ELBs
     </h1>
   
   
@@ -176,11 +176,61 @@
 </ul>
 </li>
 </ul>
+<h2 id="Auto-Scaling-Group-ASG-Overview"><a href="#Auto-Scaling-Group-ASG-Overview" class="headerlink" title="Auto Scaling Group (ASG) Overview"></a>Auto Scaling Group (ASG) Overview</h2><h3 id="What-is-Auto-Scaling-Group"><a href="#What-is-Auto-Scaling-Group" class="headerlink" title="What is Auto Scaling Group?"></a>What is Auto Scaling Group?</h3><p>In real-life, the load on the website and application can change and in cloud, people can create and get rid of servers very quickly. The goal of the an ASG is to:</p>
+<ol>
+<li>Scale out to match an increased load</li>
+<li>Scale in to match an decreased load</li>
+<li>Ensure we have a minimum and a maximum number of machines running</li>
+<li>Automatically Register new instances to a load balancer</li>
+</ol>
+<h3 id="ASG-Atrributes"><a href="#ASG-Atrributes" class="headerlink" title="ASG Atrributes:"></a>ASG Atrributes:</h3><ul>
+<li>A launch Configuration:<ul>
+<li>AMI + Instance Type</li>
+<li>EC2 User Data</li>
+<li>EBS Volumes</li>
+<li>Security Groups</li>
+<li>SSH Key Pair</li>
+</ul>
+</li>
+<li>Min SIze/ Max Size/ Initial Capacity</li>
+<li>Network + Subnets Information</li>
+<li>Load Balancer Information</li>
+<li>Scaling Policies</li>
+</ul>
+<h3 id="Auto-Scaling-Alarms"><a href="#Auto-Scaling-Alarms" class="headerlink" title="Auto Scaling Alarms"></a>Auto Scaling Alarms</h3><ul>
+<li>It is possible to scale an ASG based on CLoudwatch Alarms</li>
+<li>An Alarm monitors a metric(Such as Average CPU)</li>
+<li><strong>Metrics are computed for the overall ASG instances</strong></li>
+<li>Based on the alarms, we can create scale-out/in policies</li>
+<li>Can do better rules  directly managed by EC2:<ul>
+<li>target Average CPU Usage</li>
+<li>Number of request on the ELB per instance</li>
+<li>Average Network In/Out</li>
+</ul>
+</li>
+<li>Can define custom metrics:<ul>
+<li>Send custome metrics from application on EC2 to CloudWatch(PutMetric API)</li>
+<li>Create CloudWatch alarm to react to low/high values</li>
+<li>Use the CloudWatch alarm as the scaling policy for ASGs</li>
+</ul>
+</li>
+</ul>
+<h3 id="Scaling-Policies"><a href="#Scaling-Policies" class="headerlink" title="Scaling Policies"></a>Scaling Policies</h3><ul>
+<li><p>Target Tracking Scaling, which is most easy to set-up<br>e.g. Want the average ASG CPU stays around 40% </p>
+</li>
+<li><p>Simple/ Step Scaling<br>e.g. When a CloudWatch Alarm is triggered</p>
+</li>
+<li><p>Scheduled Actions</p>
+<p>e.g. Anticipate a scaling based on known usage pattern</p>
+</li>
+</ul>
+<h3 id="Scaling-Cooldowns"><a href="#Scaling-Cooldowns" class="headerlink" title="Scaling Cooldowns"></a>Scaling Cooldowns</h3><p>The cooldown period helps to ensure that your Auto Scalfing group doesn’t launch or terminate additional instances before the previous scaling activity takes effect.</p>
+<p>In addition to default cooldown for ASG, we can create cooldowns that apply to a specific scaling policy, andi  will override t5he default cooldown period.</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.kiwitwitter.com/2020/08/02/AwsdCertifiedDeveloperAssociate-1/" data-id="ckde4f6up00007p9k396872fb"
+      <a data-url="http://www.kiwitwitter.com/2020/08/02/AwsdCertifiedDeveloperAssociate-1/" data-id="cke89pfee0000wx9ke1d0gqx6"
          class="article-share-link">Share</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/aws-certified-developer-associate/" rel="tag">aws_certified_developer_associate</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/study/" rel="tag">study</a></li></ul>
@@ -192,6 +242,15 @@
   
     
   <nav class="article-nav">
+    
+      <a href="/2020/08/23/AwsdCertifiedDeveloperAssociate-2/" class="article-nav-link">
+        <strong class="article-nav-caption">Newer posts</strong>
+        <div class="article-nav-title">
+          
+            Aws Certified Developer Associate, EC2 Storages
+          
+        </div>
+      </a>
     
     
       <a href="/2020/01/21/aws-cloud-practitioner-4/" class="article-nav-link">

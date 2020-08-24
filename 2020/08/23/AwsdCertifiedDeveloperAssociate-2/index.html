@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    Aws Certified Developer Associate, EC2 Storages |
+    
+    Peng&#39;s Blog</title>
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<script src="/js/pace.min.js"></script>
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+<main class="content">
+  <section class="outer">
+  
+
+<article id="post-AwsdCertifiedDeveloperAssociate-2" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Aws Certified Developer Associate, EC2 Storages
+    </h1>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2020/08/23/AwsdCertifiedDeveloperAssociate-2/" class="article-date">
+  <time datetime="2020-08-24T03:30:56.000Z" itemprop="datePublished">2020-08-23</time>
+</a>
+        
+      </div>
+    
+
+    
+      
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <h2 id="Elastic-Block-Store"><a href="#Elastic-Block-Store" class="headerlink" title="Elastic Block Store"></a>Elastic Block Store</h2><p>A EC2 machine loses its root volume (main drive) when it is mannually terminated, and unexpected terminations might happen from time to time. So sometimes, you need a way to store your instance data somewhere. </p>
+<p>An EBS (Elastic Block Store) Volume is a network drive that you can attach to your instances while they run, and it allows your instances to persist data.</p>
+<h3 id="EBS-Volume"><a href="#EBS-Volume" class="headerlink" title="EBS Volume"></a>EBS Volume</h3><ul>
+<li>It’s a network drive (not a physical drive)<ul>
+<li>It uses the network to communicate the instance, which means there might be a bit of latency</li>
+<li>It can be detached from an EC2 insatnce and attached to another one quickly in the same AZ</li>
+</ul>
+</li>
+<li>It’s locked to an Availability Zone (AZ)<ul>
+<li>To move a volumne across, you need to snapshot it</li>
+</ul>
+</li>
+<li>Have a provisioned capacity (size in GBs and IOPS)<ul>
+<li>You get billed for all the provisioned capacity</li>
+<li>You can increase the capacity of the drive over time</li>
+</ul>
+</li>
+</ul>
+<h3 id="EBS-Volume-Types"><a href="#EBS-Volume-Types" class="headerlink" title="EBS Volume Types"></a>EBS Volume Types</h3><ul>
+<li>EBS volumes come in 4 types:<ol>
+<li>GP2 (SSD): general SSD balances price and performance for a variety of workloads</li>
+<li>IO1 (SSD): Highest-performance SSD volume for mission-critical  low latency or high-throughput workloads</li>
+<li>ST1 (HDD): Low cost HDD volume designed for frequently accessed, throughput-intensive workloads</li>
+<li>SC1 (HDD): Lowest cost HDD volume designed for less frequently accessed workloads</li>
+</ol>
+</li>
+<li>EBS Volumes are characterized in Size| Throughput| IOPS (I/O Per Sec)</li>
+<li>When in doubt, always consult the AWS documentation.</li>
+<li>Only GP2 and IO1 can be used as boot volumes</li>
+</ul>
+<h3 id="EBS-Volume-Types-Use-cases"><a href="#EBS-Volume-Types-Use-cases" class="headerlink" title="EBS Volume Types Use cases"></a>EBS Volume Types Use cases</h3><ol>
+<li><p>GP2</p>
+<ul>
+<li>Recommended for most workloads</li>
+<li>System boot volumes</li>
+<li>Virtual desktops</li>
+<li>Low-latency interactive apps</li>
+<li>Developemtn and test environments</li>
+<li>Volume ranges from 1 GiB to 16 TiB, Max IOPS is 16,000.</li>
+<li>Small GP2 volumes can burst IOPS to 3000, 3 IOPS/GiB, means that at 5,334GB, we are at the max IOPS</li>
+</ul>
+</li>
+<li><p>IO1</p>
+<ul>
+<li><p>Critical business applications that require sustained IOPS performance, or more than 16,000 IOPS per volume (gp2 limit)</p>
+</li>
+<li><p>Large database workloads, such as:</p>
+<p>Mongoldb, cassandra, Microsoft SQL Server, MySQL, PostgreSQL, Oracle</p>
+</li>
+<li><p>Volume ranges from 4 GiB to 16 TiB</p>
+</li>
+<li><p>IOPS is provisioned, MIN 100 - MAX 64,000 (Nitro instance), else MAX 32,000 (other instance)</p>
+</li>
+<li><p>The maximum ratio of provisioned IOPS to requested volume size (in GiB) is 50:1</p>
+</li>
+</ul>
+</li>
+<li><p>ST1</p>
+<ul>
+<li>Streaming workloads requiring consistent, fast throughput at a low price</li>
+<li>Big data, Data warehouses, Log processing</li>
+<li>Apache Kafka</li>
+<li>Cannot be a boot volume</li>
+<li>Volume ranges from 500 GiB - 16TiB</li>
+<li>Max IOPS is 500</li>
+<li>Max throughput of 500 MiB/s - can burst</li>
+</ul>
+</li>
+<li><p>SC1</p>
+<ul>
+<li>Throughput-oriented storage for large volumes of data that is infrequently accessed</li>
+<li>Scenarios where the lowest storage cost is important</li>
+<li>Cannot be a boot volume</li>
+<li>Volume ranges from 500 GiB to 16 TiB</li>
+<li>Max IOPS is 250</li>
+<li>Max throughput of 250 MiB/s - can burst</li>
+</ul>
+</li>
+</ol>
+<h3 id="EBS-vs-Instance-Store"><a href="#EBS-vs-Instance-Store" class="headerlink" title="EBS vs Instance Store"></a>EBS vs Instance Store</h3><ul>
+<li>Instance Store Pros:<ul>
+<li>Better I/O performance</li>
+<li>Good for buffer / cache/ scratch data/ temporary content</li>
+<li>Data survives reboots</li>
+</ul>
+</li>
+<li>Instance Store Cons:<ul>
+<li>On stop or termination, the instance store is lost</li>
+<li>You can’t resize the instance store</li>
+<li>Backups must be operated by the user</li>
+</ul>
+</li>
+</ul>
+<h2 id="Elastic-File-System"><a href="#Elastic-File-System" class="headerlink" title="Elastic File System"></a>Elastic File System</h2>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.kiwitwitter.com/2020/08/23/AwsdCertifiedDeveloperAssociate-2/" data-id="cke89pfeo0005wx9kfehogj5s"
+         class="article-share-link">Share</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/aws-certified-developer-associate/" rel="tag">aws_certified_developer_associate</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/study/" rel="tag">study</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+    
+  <nav class="article-nav">
+    
+    
+      <a href="/2020/08/02/AwsdCertifiedDeveloperAssociate-1/" class="article-nav-link">
+        <strong class="article-nav-caption">Olde posts</strong>
+        <div class="article-nav-title">Aws Certified Developer Associate, ELBs</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+    
+  <div class="gitalk" id="gitalk-container"></div>
+  
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+
+  
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+  
+<script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.min.js"></script>
+
+  <script type="text/javascript">
+    var gitalk = new Gitalk({
+      clientID: '4560320fc5c4fb5f8442',
+      clientSecret: '36b678c124208fa9b806ac343fe4ad4b433f0eb0',
+      repo: 'hexo-storage',
+      owner: 'Kiwitwitter',
+      admin: ['Kiwitwitter'],
+      // id: location.pathname,      // Ensure uniqueness and length less than 50
+      id: md5(location.pathname),
+      distractionFreeMode: false,  // Facebook-like distraction free mode
+      pagerDirection: 'last'
+    })
+
+  gitalk.render('gitalk-container')
+  </script>
+
+  
+
+</article>
+
+
+
+</section>
+  <footer class="footer">
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+    <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>&copy; 2020 Peng&#39;s Blog</li>
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>Theme  <a href="https://github.com/zhwangart/hexo-theme-ocean" target="_blank" rel="noopener">Ocean</a></li>
+    </ul>
+  </div>
+</footer>
+
+</main>
+
+<aside class="sidebar sidebar-specter">
+  
+    <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+    <div class="logo">
+      <a href="/"><img src="/images/hexo.svg" alt="Peng&#39;s Blog"></a>
+    </div>
+  
+  <ul class="nav nav-main">
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/">Home</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/archives">Archives</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/gallery">Gallery</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/about">About</a>
+      </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="Search">
+        <i class="fe fe-search"></i>
+        Search
+      </a>
+    </li>
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+  <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
+      
+        <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+          <i class="fe fe-feed"></i>
+        </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+  </aside>
+  
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+  
+<script src="/js/tocbot.min.js"></script>
+
+  <script>
+    // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+    tocbot.init({
+      tocSelector: '.tocbot',
+      contentSelector: '.article-entry',
+      headingSelector: 'h1, h2, h3, h4, h5, h6',
+      hasInnerContainers: true,
+      scrollSmooth: true,
+      positionFixedSelector: '.tocbot',
+      positionFixedClass: 'is-position-fixed',
+      fixedSidebarOffset: 'auto',
+    });
+  </script>
+
+
+
+<script src="/js/ocean.js"></script>
+
+
+</body>
+</html>

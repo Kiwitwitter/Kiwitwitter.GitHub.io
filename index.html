@@ -68,6 +68,160 @@
       
         
 
+<article id="post-AwsdCertifiedDeveloperAssociate-2" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2020/08/23/AwsdCertifiedDeveloperAssociate-2/">Aws Certified Developer Associate, EC2 Storages</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2020/08/23/AwsdCertifiedDeveloperAssociate-2/" class="article-date">
+  <time datetime="2020-08-24T03:30:56.000Z" itemprop="datePublished">2020-08-23</time>
+</a>
+        
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <h2 id="Elastic-Block-Store"><a href="#Elastic-Block-Store" class="headerlink" title="Elastic Block Store"></a>Elastic Block Store</h2><p>A EC2 machine loses its root volume (main drive) when it is mannually terminated, and unexpected terminations might happen from time to time. So sometimes, you need a way to store your instance data somewhere. </p>
+<p>An EBS (Elastic Block Store) Volume is a network drive that you can attach to your instances while they run, and it allows your instances to persist data.</p>
+<h3 id="EBS-Volume"><a href="#EBS-Volume" class="headerlink" title="EBS Volume"></a>EBS Volume</h3><ul>
+<li>It’s a network drive (not a physical drive)<ul>
+<li>It uses the network to communicate the instance, which means there might be a bit of latency</li>
+<li>It can be detached from an EC2 insatnce and attached to another one quickly in the same AZ</li>
+</ul>
+</li>
+<li>It’s locked to an Availability Zone (AZ)<ul>
+<li>To move a volumne across, you need to snapshot it</li>
+</ul>
+</li>
+<li>Have a provisioned capacity (size in GBs and IOPS)<ul>
+<li>You get billed for all the provisioned capacity</li>
+<li>You can increase the capacity of the drive over time</li>
+</ul>
+</li>
+</ul>
+<h3 id="EBS-Volume-Types"><a href="#EBS-Volume-Types" class="headerlink" title="EBS Volume Types"></a>EBS Volume Types</h3><ul>
+<li>EBS volumes come in 4 types:<ol>
+<li>GP2 (SSD): general SSD balances price and performance for a variety of workloads</li>
+<li>IO1 (SSD): Highest-performance SSD volume for mission-critical  low latency or high-throughput workloads</li>
+<li>ST1 (HDD): Low cost HDD volume designed for frequently accessed, throughput-intensive workloads</li>
+<li>SC1 (HDD): Lowest cost HDD volume designed for less frequently accessed workloads</li>
+</ol>
+</li>
+<li>EBS Volumes are characterized in Size| Throughput| IOPS (I/O Per Sec)</li>
+<li>When in doubt, always consult the AWS documentation.</li>
+<li>Only GP2 and IO1 can be used as boot volumes</li>
+</ul>
+<h3 id="EBS-Volume-Types-Use-cases"><a href="#EBS-Volume-Types-Use-cases" class="headerlink" title="EBS Volume Types Use cases"></a>EBS Volume Types Use cases</h3><ol>
+<li><p>GP2</p>
+<ul>
+<li>Recommended for most workloads</li>
+<li>System boot volumes</li>
+<li>Virtual desktops</li>
+<li>Low-latency interactive apps</li>
+<li>Developemtn and test environments</li>
+<li>Volume ranges from 1 GiB to 16 TiB, Max IOPS is 16,000.</li>
+<li>Small GP2 volumes can burst IOPS to 3000, 3 IOPS/GiB, means that at 5,334GB, we are at the max IOPS</li>
+</ul>
+</li>
+<li><p>IO1</p>
+<ul>
+<li><p>Critical business applications that require sustained IOPS performance, or more than 16,000 IOPS per volume (gp2 limit)</p>
+</li>
+<li><p>Large database workloads, such as:</p>
+<p>Mongoldb, cassandra, Microsoft SQL Server, MySQL, PostgreSQL, Oracle</p>
+</li>
+<li><p>Volume ranges from 4 GiB to 16 TiB</p>
+</li>
+<li><p>IOPS is provisioned, MIN 100 - MAX 64,000 (Nitro instance), else MAX 32,000 (other instance)</p>
+</li>
+<li><p>The maximum ratio of provisioned IOPS to requested volume size (in GiB) is 50:1</p>
+</li>
+</ul>
+</li>
+<li><p>ST1</p>
+<ul>
+<li>Streaming workloads requiring consistent, fast throughput at a low price</li>
+<li>Big data, Data warehouses, Log processing</li>
+<li>Apache Kafka</li>
+<li>Cannot be a boot volume</li>
+<li>Volume ranges from 500 GiB - 16TiB</li>
+<li>Max IOPS is 500</li>
+<li>Max throughput of 500 MiB/s - can burst</li>
+</ul>
+</li>
+<li><p>SC1</p>
+<ul>
+<li>Throughput-oriented storage for large volumes of data that is infrequently accessed</li>
+<li>Scenarios where the lowest storage cost is important</li>
+<li>Cannot be a boot volume</li>
+<li>Volume ranges from 500 GiB to 16 TiB</li>
+<li>Max IOPS is 250</li>
+<li>Max throughput of 250 MiB/s - can burst</li>
+</ul>
+</li>
+</ol>
+<h3 id="EBS-vs-Instance-Store"><a href="#EBS-vs-Instance-Store" class="headerlink" title="EBS vs Instance Store"></a>EBS vs Instance Store</h3><ul>
+<li>Instance Store Pros:<ul>
+<li>Better I/O performance</li>
+<li>Good for buffer / cache/ scratch data/ temporary content</li>
+<li>Data survives reboots</li>
+</ul>
+</li>
+<li>Instance Store Cons:<ul>
+<li>On stop or termination, the instance store is lost</li>
+<li>You can’t resize the instance store</li>
+<li>Backups must be operated by the user</li>
+</ul>
+</li>
+</ul>
+<h2 id="Elastic-File-System"><a href="#Elastic-File-System" class="headerlink" title="Elastic File System"></a>Elastic File System</h2>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.kiwitwitter.com/2020/08/23/AwsdCertifiedDeveloperAssociate-2/" data-id="cke89pfeo0005wx9kfehogj5s"
+         class="article-share-link">Share</a>
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/aws-certified-developer-associate/" rel="tag">aws_certified_developer_associate</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/study/" rel="tag">study</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+      
+        
+
 <article id="post-AwsdCertifiedDeveloperAssociate-1" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
@@ -76,7 +230,7 @@
         
   
     <h2 itemprop="name">
-      <a class="article-title" href="/2020/08/02/AwsdCertifiedDeveloperAssociate-1/">Aws Certified Developer Associate, ELBs and ASGs</a>
+      <a class="article-title" href="/2020/08/02/AwsdCertifiedDeveloperAssociate-1/">Aws Certified Developer Associate, ELBs</a>
     </h2>
   
   
@@ -205,11 +359,61 @@
 </ul>
 </li>
 </ul>
+<h2 id="Auto-Scaling-Group-ASG-Overview"><a href="#Auto-Scaling-Group-ASG-Overview" class="headerlink" title="Auto Scaling Group (ASG) Overview"></a>Auto Scaling Group (ASG) Overview</h2><h3 id="What-is-Auto-Scaling-Group"><a href="#What-is-Auto-Scaling-Group" class="headerlink" title="What is Auto Scaling Group?"></a>What is Auto Scaling Group?</h3><p>In real-life, the load on the website and application can change and in cloud, people can create and get rid of servers very quickly. The goal of the an ASG is to:</p>
+<ol>
+<li>Scale out to match an increased load</li>
+<li>Scale in to match an decreased load</li>
+<li>Ensure we have a minimum and a maximum number of machines running</li>
+<li>Automatically Register new instances to a load balancer</li>
+</ol>
+<h3 id="ASG-Atrributes"><a href="#ASG-Atrributes" class="headerlink" title="ASG Atrributes:"></a>ASG Atrributes:</h3><ul>
+<li>A launch Configuration:<ul>
+<li>AMI + Instance Type</li>
+<li>EC2 User Data</li>
+<li>EBS Volumes</li>
+<li>Security Groups</li>
+<li>SSH Key Pair</li>
+</ul>
+</li>
+<li>Min SIze/ Max Size/ Initial Capacity</li>
+<li>Network + Subnets Information</li>
+<li>Load Balancer Information</li>
+<li>Scaling Policies</li>
+</ul>
+<h3 id="Auto-Scaling-Alarms"><a href="#Auto-Scaling-Alarms" class="headerlink" title="Auto Scaling Alarms"></a>Auto Scaling Alarms</h3><ul>
+<li>It is possible to scale an ASG based on CLoudwatch Alarms</li>
+<li>An Alarm monitors a metric(Such as Average CPU)</li>
+<li><strong>Metrics are computed for the overall ASG instances</strong></li>
+<li>Based on the alarms, we can create scale-out/in policies</li>
+<li>Can do better rules  directly managed by EC2:<ul>
+<li>target Average CPU Usage</li>
+<li>Number of request on the ELB per instance</li>
+<li>Average Network In/Out</li>
+</ul>
+</li>
+<li>Can define custom metrics:<ul>
+<li>Send custome metrics from application on EC2 to CloudWatch(PutMetric API)</li>
+<li>Create CloudWatch alarm to react to low/high values</li>
+<li>Use the CloudWatch alarm as the scaling policy for ASGs</li>
+</ul>
+</li>
+</ul>
+<h3 id="Scaling-Policies"><a href="#Scaling-Policies" class="headerlink" title="Scaling Policies"></a>Scaling Policies</h3><ul>
+<li><p>Target Tracking Scaling, which is most easy to set-up<br>e.g. Want the average ASG CPU stays around 40% </p>
+</li>
+<li><p>Simple/ Step Scaling<br>e.g. When a CloudWatch Alarm is triggered</p>
+</li>
+<li><p>Scheduled Actions</p>
+<p>e.g. Anticipate a scaling based on known usage pattern</p>
+</li>
+</ul>
+<h3 id="Scaling-Cooldowns"><a href="#Scaling-Cooldowns" class="headerlink" title="Scaling Cooldowns"></a>Scaling Cooldowns</h3><p>The cooldown period helps to ensure that your Auto Scalfing group doesn’t launch or terminate additional instances before the previous scaling activity takes effect.</p>
+<p>In addition to default cooldown for ASG, we can create cooldowns that apply to a specific scaling policy, andi  will override t5he default cooldown period.</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.kiwitwitter.com/2020/08/02/AwsdCertifiedDeveloperAssociate-1/" data-id="ckde4f6up00007p9k396872fb"
+      <a data-url="http://www.kiwitwitter.com/2020/08/02/AwsdCertifiedDeveloperAssociate-1/" data-id="cke89pfee0000wx9ke1d0gqx6"
          class="article-share-link">Share</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/aws-certified-developer-associate/" rel="tag">aws_certified_developer_associate</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/study/" rel="tag">study</a></li></ul>
@@ -512,7 +716,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.kiwitwitter.com/2020/01/21/aws-cloud-practitioner-4/" data-id="ck5qj7fe80000p0p4acx3eckp"
+      <a data-url="http://www.kiwitwitter.com/2020/01/21/aws-cloud-practitioner-4/" data-id="cke89pfel0002wx9kgoq931bc"
          class="article-share-link">Share</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/aws-cloud-practitioner/" rel="tag">aws_cloud_practitioner</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/study/" rel="tag">study</a></li></ul>
@@ -772,7 +976,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.kiwitwitter.com/2020/01/20/aws-cloud-practitioner-3/" data-id="ck5nib1m00000ulp4070jg578"
+      <a data-url="http://www.kiwitwitter.com/2020/01/20/aws-cloud-practitioner-3/" data-id="cke89pfer0008wx9kbgzh8d0s"
          class="article-share-link">Share</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/aws-cloud-practitioner/" rel="tag">aws_cloud_practitioner</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/study/" rel="tag">study</a></li></ul>
@@ -1253,7 +1457,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.kiwitwitter.com/2020/01/12/aws-cloud-practitioner-2/" data-id="ck5dmwr1g0007mmp4a8k1azka"
+      <a data-url="http://www.kiwitwitter.com/2020/01/12/aws-cloud-practitioner-2/" data-id="cke89pfet000bwx9k92f09z87"
          class="article-share-link">Share</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/aws-cloud-practitioner/" rel="tag">aws_cloud_practitioner</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/study/" rel="tag">study</a></li></ul>
@@ -1468,7 +1672,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.kiwitwitter.com/2020/01/02/aws-cloud-partitioner-1/" data-id="ck5dmwr0x0000mmp43scs0ms0"
+      <a data-url="http://www.kiwitwitter.com/2020/01/02/aws-cloud-partitioner-1/" data-id="cke89pfeq0007wx9k1zxc3un0"
          class="article-share-link">Share</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/aws-cloud-practitioner/" rel="tag">aws_cloud_practitioner</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/study/" rel="tag">study</a></li></ul>
@@ -1531,12 +1735,12 @@
 <p>今天真的可以说是2019年众多平淡无奇的日子里比较倒霉的一天了，下午满怀期盼的开着车去Pacifica拍日落，结果盼来的是<strong>万里多云</strong>。层层叠叠、阴阴沉沉的云似乎也预示着今天注定不平凡。</p>
 <p>(to be continued…)</p>
 
-    <div id="aplayer-akwaTHJJ" class="aplayer aplayer-tag-marker meting-tag-marker" data-id="5264717" data-server="netease" data-type="song" data-mode="circulation" data-autoplay="true" data-mutex="true" data-listmaxheight="340px" data-preload="auto" data-theme="#ad7a86"></div>
+    <div id="aplayer-hFmSHrLu" class="aplayer aplayer-tag-marker meting-tag-marker" data-id="5264717" data-server="netease" data-type="song" data-mode="circulation" data-autoplay="true" data-mutex="true" data-listmaxheight="340px" data-preload="auto" data-theme="#ad7a86"></div>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.kiwitwitter.com/2019/12/28/proposal/" data-id="ck5dmwr1d0005mmp4492e3hk5"
+      <a data-url="http://www.kiwitwitter.com/2019/12/28/proposal/" data-id="cke89pfew000dwx9kbnwshm5b"
          class="article-share-link">Share</a>
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SpecialOfLife/" rel="tag">SpecialOfLife</a></li></ul>
@@ -1601,7 +1805,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.kiwitwitter.com/2019/12/26/hola-el-mundo/" data-id="ck5dmwr170002mmp42kwn174u"
+      <a data-url="http://www.kiwitwitter.com/2019/12/26/hola-el-mundo/" data-id="cke89pfes000awx9k9ur8ehtt"
          class="article-share-link">Share</a>
       
     </footer>
