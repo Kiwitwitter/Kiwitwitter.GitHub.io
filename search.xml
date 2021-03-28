@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>AWS Fundamentals, RDS + Aurora + ElatiCache</title>
+    <url>/2021/03/27/AwsdCertifiedDeveloperAssociate-3/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h2 id="Amazon-RDS"><a href="#Amazon-RDS" class="headerlink" title="Amazon RDS"></a>Amazon RDS</h2>]]></content>
+      <tags>
+        <tag>study</tag>
+        <tag>aws_certified_developer_associate</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Aws Certified Developer Associate, EC2 Storages</title>
     <url>/2020/08/23/AwsdCertifiedDeveloperAssociate-2/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h2 id="Elastic-Block-Store"><a href="#Elastic-Block-Store" class="headerlink" title="Elastic Block Store"></a>Elastic Block Store</h2><p>A EC2 machine loses its root volume (main drive) when it is mannually terminated, and unexpected terminations might happen from time to time. So sometimes, you need a way to store your instance data somewhere. </p>
