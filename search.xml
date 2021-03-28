@@ -96,7 +96,66 @@
 </ul>
 </li>
 </ul>
-<h2 id="Elastic-File-System"><a href="#Elastic-File-System" class="headerlink" title="Elastic File System"></a>Elastic File System</h2>]]></content>
+<h2 id="Elastic-File-System"><a href="#Elastic-File-System" class="headerlink" title="Elastic File System"></a>Elastic File System</h2><ul>
+<li>Managed NFS (Network File System) that can be mounted on many EC2s, which means all EC2 attached to it have access to it</li>
+<li>EFS works with EC2 instances in multi-AZs</li>
+<li>High available, scalable, expensive (3 * gp2), pay per use</li>
+<li>Use cases: content management, web serving, data sharing, Wordpress</li>
+<li>Use NFSv4.I protocol</li>
+<li>Use security groupn to control access to EFS</li>
+<li><strong>Compatible with Linux based AMI only</strong></li>
+<li>Encryption at rest using KMS</li>
+<li>POSIX file system (~Linux) that has a standard file API</li>
+<li>File system scales automatically, pay per use, no capacity planning</li>
+</ul>
+<h2 id="EFS-Performance-and-Storage-Classes"><a href="#EFS-Performance-and-Storage-Classes" class="headerlink" title="EFS - Performance and Storage Classes"></a>EFS - Performance and Storage Classes</h2><ul>
+<li>EFS Scale:<ul>
+<li>1000s of concurrent NFS clients, 10 GB+/s throughtput</li>
+<li>Grow to Petabyte-scale NFS, automatically</li>
+</ul>
+</li>
+<li>Performance Mode (Set at EFS creation time):<ul>
+<li>General purpose(default): latency-sensitive use cases(web server, CMS, etc..)</li>
+<li>Max I/O - higher latency, throughtput, highly parallel</li>
+</ul>
+</li>
+<li>Stoage Tiers (lifecycle management feature – move file after N days):<ul>
+<li>Standard: for frequently accessed files</li>
+<li>Infrequent access (EFS-IA): cost to retrieve files, lower price to store</li>
+</ul>
+</li>
+</ul>
+<h2 id="EBS-vs-EFS"><a href="#EBS-vs-EFS" class="headerlink" title="EBS vs EFS"></a>EBS vs EFS</h2><table>
+<thead>
+<tr>
+<th>EBS</th>
+<th>EFS</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>can be attached to only one instance at a time<br>are locked at the Availability Zone (AZ) level</td>
+<td>Mounting 100s of instances across AZ</td>
+</tr>
+<tr>
+<td>gp2: IO increases if the disk size increases<br>io1: can increase IO independently</td>
+<td>1000s of concurrent NFS clients, 10 GB+/s throughtput</td>
+</tr>
+</tbody></table>
+<h3 id="EBS"><a href="#EBS" class="headerlink" title="EBS:"></a>EBS:</h3><ul>
+<li>To migrate an EBS volume across AZ<ol>
+<li>Take a snapshot</li>
+<li>Restore the snapshot to another AZ</li>
+<li>EBS backups use IO and you shouldn’t run them while your application is handling a lot of traffic</li>
+</ol>
+</li>
+<li>Root EBS Volumes of instances get terminated by default if the EC2 instance gets terminated. (you can disable that)</li>
+</ul>
+<h3 id="EFS"><a href="#EFS" class="headerlink" title="EFS:"></a>EFS:</h3><ul>
+<li>Only for Linux Instances (POSIX)</li>
+<li>EFS has a higher price point than EBS</li>
+<li>Can leverage EFS-IA for cost savings</li>
+</ul>
+]]></content>
       <tags>
         <tag>study</tag>
         <tag>aws_certified_developer_associate</tag>
