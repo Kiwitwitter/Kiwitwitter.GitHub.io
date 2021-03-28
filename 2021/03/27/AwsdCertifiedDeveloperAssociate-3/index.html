@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <title>
-    AWS Fundamentals, RDS + Aurora + ElatiCache |
+    AwsdCertifiedDeveloperAssociate-3 |
     
     Peng&#39;s Blog</title>
   
@@ -39,7 +39,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      AWS Fundamentals, RDS + Aurora + ElatiCache
+      AwsdCertifiedDeveloperAssociate-3
     </h1>
   
   
@@ -53,7 +53,7 @@
     
       <div class="article-meta">
         <a href="/2021/03/27/AwsdCertifiedDeveloperAssociate-3/" class="article-date">
-  <time datetime="2021-03-28T01:44:20.000Z" itemprop="datePublished">2021-03-27</time>
+  <time datetime="2021-03-28T01:44:20.466Z" itemprop="datePublished">2021-03-27</time>
 </a>
         
       </div>
@@ -76,15 +76,181 @@
       
 
       
-        <h2 id="Amazon-RDS"><a href="#Amazon-RDS" class="headerlink" title="Amazon RDS"></a>Amazon RDS</h2>
+        <p>title: AWS Fundamentals, RDS + Aurora + ElatiCache<br>date: 2021-03-27 18:44:20<br>tags:</p>
+<ul>
+<li>study</li>
+<li>aws_certified_developer_associate</li>
+</ul>
+<h2 id="Amazon-RDS"><a href="#Amazon-RDS" class="headerlink" title="Amazon RDS"></a>Amazon RDS</h2><h3 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h3><ul>
+<li><p>RDS stands for Relational Database Service</p>
+</li>
+<li><p>It’s a managed DB service for DB use SQL as a query language.</p>
+</li>
+<li><p>It allows you to create databases in the cloud that are managed by AWS</p>
+<p>• Postgres</p>
+<p>• MySQL</p>
+<p>• MariaDB</p>
+<p>• Oracle</p>
+<p>• Microsoft SQL Server</p>
+<p>• Aurora (AWS Proprietary database)</p>
+</li>
+</ul>
+<h3 id="Advantage-over-using-RDS-vs-Deploying-DB-on-EC2"><a href="#Advantage-over-using-RDS-vs-Deploying-DB-on-EC2" class="headerlink" title="Advantage over using RDS vs Deploying DB on EC2"></a>Advantage over using RDS vs Deploying DB on EC2</h3><ul>
+<li><p>RDS is <strong>Managed</strong> service, which means you cannot SSH into your instances</p>
+<p>• Automated provisioning, OS patching</p>
+<p>• Continuous backups and restore to specific timestamp (Point in Time Restore)!</p>
+<p>• Monitoring dashboards</p>
+<p>• Read replicas for improved read performance</p>
+<p>• Multi AZ setup for DR (Disaster Recovery)</p>
+<p>• Maintenance windows for upgrades</p>
+<p>• Scaling capability (vertical and horizontal)</p>
+<p>• Storage backed by EBS (gp2 or io1)</p>
+</li>
+</ul>
+<h3 id="RDS-backups"><a href="#RDS-backups" class="headerlink" title="RDS backups"></a>RDS backups</h3><ul>
+<li><p>Automated backups:</p>
+<ul>
+<li>Daily full backup of the database (during the maintenance window)</li>
+<li>Transaction logs are backed-up by RDS every 5 minutes</li>
+<li>=&gt; ability to restore to any point in time (from oldest backup to 5 minutes ago)</li>
+<li>7 days retention (can be increased to 35 days)</li>
+</ul>
+</li>
+<li><p>DB Snapshot:</p>
+<ul>
+<li>Manually triggered by the user</li>
+<li>Retention of backup for as long as you want</li>
+</ul>
+</li>
+</ul>
+<h3 id="RDS-Read-replicas-for-read-scalability"><a href="#RDS-Read-replicas-for-read-scalability" class="headerlink" title="RDS Read replicas for read scalability"></a>RDS Read replicas for read scalability</h3><p><img src="https://raw.githubusercontent.com/Kiwitwitter/hexo-storage/master/img/Screen%20Shot%202021-03-27%20at%207.04.28%20PM.png" alt></p>
+<ul>
+<li>Up to 5 replicas</li>
+<li>Within AZ, Cross AZ ot Cross Region</li>
+<li>Replication is <strong>ASYNC</strong>, so reads are eventually consistent</li>
+<li>Replicas can be promoted to their own DB</li>
+<li>Applications must update the connection string to leverage read replicas</li>
+</ul>
+<h4 id="Use-Cases"><a href="#Use-Cases" class="headerlink" title="Use Cases:"></a>Use Cases:</h4><p><img src="https://raw.githubusercontent.com/Kiwitwitter/hexo-storage/master/img/Screen%20Shot%202021-03-28%20at%2012.45.16%20PM.png" alt></p>
+<ul>
+<li>You have a production database that is taking on normal load</li>
+<li>You want to run a reporting application to run some analytics</li>
+<li>You create a Read Replica to run the new workload there</li>
+<li>The production application is unaffected</li>
+<li>Read replicas are used for SELECT (=read) only kind of statements (not INSERT, UPDATE, DELETE)</li>
+</ul>
+<h4 id="Network-Cost"><a href="#Network-Cost" class="headerlink" title="Network Cost"></a>Network Cost</h4><ul>
+<li>In AWS there’s a network cost when data goes from one AZ to another</li>
+<li>To reduce the cost, you can have your Read Replicas in the same AZ</li>
+</ul>
+<h4 id="Multi-AZ-Disaster-Recovery"><a href="#Multi-AZ-Disaster-Recovery" class="headerlink" title="Multi-AZ(Disaster Recovery)"></a>Multi-AZ(Disaster Recovery)</h4><p><img src="https://raw.githubusercontent.com/Kiwitwitter/hexo-storage/master/img/Screen%20Shot%202021-03-28%20at%2012.54.19%20PM.png" alt></p>
+<ul>
+<li><strong>SYNC</strong> Replicas</li>
+<li>One DNS Name - automatic app failover to standby</li>
+<li>Increase availability</li>
+<li>Failoiver in case of loss of AZ, loss of network, instance or storage failure</li>
+<li>No manual intervention in apps</li>
+<li>Not used for scaling</li>
+</ul>
+<h3 id="RDS-Encryption-and-Security"><a href="#RDS-Encryption-and-Security" class="headerlink" title="RDS Encryption and Security"></a>RDS Encryption and Security</h3><ul>
+<li>At Rest encryption:<ul>
+<li>Possibility to encrypt the master &amp; read replicas with AWS KMS - AES-256 encryption</li>
+<li>Encryption has to be defined at launch time</li>
+<li>If the master is not encrypted, the read replicas cannot be encrypted</li>
+<li>Transparent Data Encryption (TDE) available for Oracle and SQL Server</li>
+</ul>
+</li>
+<li>In-flight encryption:<ul>
+<li>SSL certificates to encrypt data to RDS in flight</li>
+<li>Provide SSL options with trust certificate when connecting to database</li>
+<li>To enforce SSL:<ul>
+<li>PostgreSQL: <code>rds.force_ssl=1</code> in the AWS RDS Console (Parameter Groups)</li>
+<li>MySQL: Within the DB: <code>GRANT USAGE ON *.* TO &#39;mysqluser&#39;@&#39;%&#39; REQUIRE SSL;</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="RDS-Encryption-Operations"><a href="#RDS-Encryption-Operations" class="headerlink" title="RDS Encryption Operations"></a>RDS Encryption Operations</h3><ul>
+<li><p>Encrypting RDS backups</p>
+<ul>
+<li><p>Snapshots of un-encrypted RDS databases are un-encrypted</p>
+</li>
+<li><p>Snapshots of encrypted RDS databases are encrypted</p>
+</li>
+<li><p>Can copy a snapshot into an encrypted one</p>
+</li>
+</ul>
+</li>
+<li><p>To encrypt an un-encrypted RDS database:</p>
+<ul>
+<li><p>Create a snapshot of the un-encrypted database</p>
+</li>
+<li><p>Copy the snapshot and enable encryption for the snapshot</p>
+</li>
+<li><p>Restore the database from the encrypted snapshot</p>
+</li>
+<li><p>Migrate applications to the new database, and delete the old database</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="RDS-Security-Network-amp-IAM"><a href="#RDS-Security-Network-amp-IAM" class="headerlink" title="RDS Security - Network &amp; IAM"></a>RDS Security - Network &amp; IAM</h3><ul>
+<li><p>Network Security</p>
+<ul>
+<li>RDS databases are usually deployed within a private subnet, not in a public one</li>
+<li>RDS security works by leveraging security groups (the same concept as for EC2 instances) – it controls which IP / security group can communicate with RDS</li>
+</ul>
+</li>
+<li><p>Access Management</p>
+<ul>
+<li>IAM Policiies help control who can manage AWS RSS, through RDS API</li>
+<li>Traditional username and password can be used to log into the database</li>
+<li>IAM-based authentication can be used to login into RDS MySQL &amp; PostgreSQL</li>
+</ul>
+</li>
+</ul>
+<h3 id="RDS-IAM-Authentication"><a href="#RDS-IAM-Authentication" class="headerlink" title="RDS - IAM Authentication"></a>RDS - IAM Authentication</h3><p><img src="https://raw.githubusercontent.com/Kiwitwitter/hexo-storage/master/img/Screen%20Shot%202021-03-28%20at%202.50.17%20PM.png" alt></p>
+<ul>
+<li>IAM database authentication works with MySQL and PostgreSQL</li>
+<li>You don’t need a password, just an authentication token obtained through IAM &amp; RDS API calls</li>
+<li>Auth token has a lifetime of 15 minutes</li>
+<li>Benefits:<ol>
+<li>Network in/out must be encrypted using SSL</li>
+<li>IAM to centrally manage users instead of DB</li>
+<li>Can leverage IAM Roles and EC2 Instance profiles for easy integration</li>
+</ol>
+</li>
+</ul>
+<h3 id="RDS-Security-Summary"><a href="#RDS-Security-Summary" class="headerlink" title="RDS Security - Summary"></a>RDS Security - Summary</h3><ul>
+<li><p>Your responsibility:</p>
+<ol>
+<li>Check the ports / IP / security group inbound rules in DB’s SG</li>
+<li>In-database user creation and permissions or manage through IAM</li>
+<li>Creating a database with or without public access</li>
+<li>Ensure parameter groups or DB is configured to only allow SSL connections</li>
+</ol>
+</li>
+<li><p>AWS responsibility:</p>
+<ol>
+<li><p>No SSH access</p>
+</li>
+<li><p>No manual DB patching</p>
+</li>
+<li><p>No manual OS patching</p>
+</li>
+<li><p>No way to audit the underlying instance</p>
+</li>
+</ol>
+</li>
+</ul>
+<h2 id="Amazon-Aurora-from-AWS-not-open-sourced"><a href="#Amazon-Aurora-from-AWS-not-open-sourced" class="headerlink" title="Amazon Aurora (from AWS, not open sourced)"></a>Amazon Aurora (from AWS, not open sourced)</h2>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.kiwitwitter.com/2021/03/27/AwsdCertifiedDeveloperAssociate-3/" data-id="ckmsi7iag00018g9k3ug64hlo"
+      <a data-url="http://www.kiwitwitter.com/2021/03/27/AwsdCertifiedDeveloperAssociate-3/" data-id="ckmtpb4wl0005j19k5aqe84t4"
          class="article-share-link">Share</a>
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/aws-certified-developer-associate/" rel="tag">aws_certified_developer_associate</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/study/" rel="tag">study</a></li></ul>
-
     </footer>
 
   </div>
