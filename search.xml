@@ -1,14 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>AwsdCertifiedDeveloperAssociate-3</title>
+    <title>AWS Fundamentals, RDS + Aurora + ElatiCache</title>
     <url>/2021/03/27/AwsdCertifiedDeveloperAssociate-3/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><p>title: AWS Fundamentals, RDS + Aurora + ElatiCache<br>date: 2021-03-27 18:44:20<br>tags:</p>
-<ul>
-<li>study</li>
-<li>aws_certified_developer_associate</li>
-</ul>
-<h2 id="Amazon-RDS"><a href="#Amazon-RDS" class="headerlink" title="Amazon RDS"></a>Amazon RDS</h2><h3 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h3><ul>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="/assets/js/Meting.min.js"></script><h2 id="Amazon-RDS"><a href="#Amazon-RDS" class="headerlink" title="Amazon RDS"></a>Amazon RDS</h2><h3 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h3><ul>
 <li><p>RDS stands for Relational Database Service</p>
 </li>
 <li><p>It’s a managed DB service for DB use SQL as a query language.</p>
@@ -84,7 +79,7 @@
 <li>Possibility to encrypt the master &amp; read replicas with AWS KMS - AES-256 encryption</li>
 <li>Encryption has to be defined at launch time</li>
 <li>If the master is not encrypted, the read replicas cannot be encrypted</li>
-<li>Transparent Data Encryption (TDE) available for Oracle and SQL Server</li>
+<li>Transparent Data Encryption (TDE, real time encryption/decryption on I/O) available for Oracle and SQL Server</li>
 </ul>
 </li>
 <li>In-flight encryption:<ul>
@@ -171,7 +166,175 @@
 </ol>
 </li>
 </ul>
-<h2 id="Amazon-Aurora-from-AWS-not-open-sourced"><a href="#Amazon-Aurora-from-AWS-not-open-sourced" class="headerlink" title="Amazon Aurora (from AWS, not open sourced)"></a>Amazon Aurora (from AWS, not open sourced)</h2>]]></content>
+<h2 id="Amazon-Aurora-from-AWS-not-open-sourced"><a href="#Amazon-Aurora-from-AWS-not-open-sourced" class="headerlink" title="Amazon Aurora (from AWS, not open sourced)"></a>Amazon Aurora (from AWS, not open sourced)</h2><h3 id="Overview-1"><a href="#Overview-1" class="headerlink" title="Overview"></a>Overview</h3><ul>
+<li><p>Postgres and MySQL are both supported as Aurora DB (that means your drivers will work as if Aurora was a Postgres or MySQL database)</p>
+</li>
+<li><p>Aurora is “AWS cloud optimized” and claims 5x performance improvement over MySQL on RDS, over 3x the performance of Postgres on RDS</p>
+</li>
+<li><p>Aurora storage automatically grows in increments of 10GB, up to 64 TB.</p>
+</li>
+<li><p>Aurora can have 15 replicas while MySQL has 5, and the replication process is faster (sub 10 ms replica lag)</p>
+</li>
+<li><p>Failover in Aurora is instantaneous. It’s HA (High Availability) native.</p>
+</li>
+<li><p>Aurora costs more than RDS (20% more) – but is more efficient</p>
+</li>
+</ul>
+<h3 id="Aurora-High-Availability-and-Read-Scaling"><a href="#Aurora-High-Availability-and-Read-Scaling" class="headerlink" title="Aurora High Availability and Read Scaling"></a>Aurora High Availability and Read Scaling</h3><ul>
+<li><p>6 copies of your data across 3 AZ:</p>
+<ul>
+<li>4 copies out of 6 needed for writes</li>
+<li>3 copies out of 6 need for reads</li>
+<li>Self healing with peer-to-peer replication</li>
+<li>Storage is striped across 100s of volumes</li>
+</ul>
+</li>
+<li><p>One Aurora Instance takes writes (master)</p>
+</li>
+<li><p>Automated failover for master in less than 30 seconds, One of the replicas will become the <strong>Master</strong> once the Master fails</p>
+</li>
+<li><p>Master + up to 15 Aurora Read Replicas serve reads</p>
+</li>
+<li><p><strong>Support for Cross Region Replication</strong></p>
+</li>
+</ul>
+<h3 id="Aurora-DB-Cluster"><a href="#Aurora-DB-Cluster" class="headerlink" title="Aurora DB Cluster"></a>Aurora DB Cluster</h3><p><img src="https://raw.githubusercontent.com/Kiwitwitter/hexo-storage/master/img/Screen%20Shot%202021-03-28%20at%203.03.05%20PM.png" alt></p>
+<h3 id="Features-of-Aurora"><a href="#Features-of-Aurora" class="headerlink" title="Features of Aurora"></a>Features of Aurora</h3><ul>
+<li>Automatic fail-over</li>
+<li>Backup and Recovery</li>
+<li>Isolation and security</li>
+<li>Industry compliance</li>
+<li>Push-button scaling</li>
+<li>Automated Patching with Zero Downtime</li>
+<li>Advanced Monitoring</li>
+<li>Routine Maintenance</li>
+<li>Backtrack: restore data at any point of time without using backups</li>
+</ul>
+<h3 id="Aurora-Security"><a href="#Aurora-Security" class="headerlink" title="Aurora Security"></a>Aurora Security</h3><ul>
+<li>Similar to RDS because uses the same engines</li>
+<li>Encryption at rest using KMS</li>
+<li>Automated backups, snapshots and replicas are also encrypted</li>
+<li>Encryption in flight using SSL (same process as MySQL or Postgres)</li>
+<li>Possibility to authenticate using IAM token (same method as RDS)</li>
+<li>You are responsible for protecting the instance with security groups</li>
+<li>You can’t SSH</li>
+</ul>
+<h3 id="Aurora-Serverless"><a href="#Aurora-Serverless" class="headerlink" title="Aurora Serverless"></a>Aurora Serverless</h3><ul>
+<li><p>Automated database instantiation and autoscaling based on actual usage</p>
+</li>
+<li><p>Good for infrequent, intermittent or unpredictable workloads</p>
+</li>
+<li><p>No capacity planning needed</p>
+</li>
+<li><p>Pay per second, can be more cost-effective</p>
+</li>
+</ul>
+<h3 id="Global-Aurora"><a href="#Global-Aurora" class="headerlink" title="Global Aurora"></a>Global Aurora</h3><ul>
+<li>Aurora Cross Region Read Replicas:<ul>
+<li>Useful for disaster recovery</li>
+<li>Simple to put in place</li>
+</ul>
+</li>
+<li>Aurora Global Database (recommended):<ul>
+<li>1 Primary Region (read / write)</li>
+<li>Up to 5 secondary (read-only) regions, replication lag is less than 1 second</li>
+<li>Up to 16 Read Replicas per secondary region</li>
+<li>Helps for decreasing latency</li>
+<li>Promoting another region (for disaster recovery) has an RTO(Recover time objective) of &lt; 1 minute</li>
+</ul>
+</li>
+</ul>
+<h2 id="ElastiCache"><a href="#ElastiCache" class="headerlink" title="ElastiCache"></a>ElastiCache</h2><h3 id="Overview-2"><a href="#Overview-2" class="headerlink" title="Overview"></a>Overview</h3><p>It’s a RDS for Caches.</p>
+<ul>
+<li>The same way RDS is to get managed Relational Databases…</li>
+<li>ElastiCache is to get managed Redis or Memcached</li>
+<li>Caches are in-memory databases with really high performance, low latency</li>
+<li>Helps reduce load off of databases for read intensive workloads</li>
+<li>Helps make your application stateless</li>
+<li>AWS takes care of OS maintenance / patching, optimizations, setup, configuration, monitoring, failure recovery and backups</li>
+</ul>
+<h3 id="Architecture"><a href="#Architecture" class="headerlink" title="Architecture"></a>Architecture</h3><h4 id="DB-Cache"><a href="#DB-Cache" class="headerlink" title="DB Cache"></a>DB Cache</h4><p><img src="https://raw.githubusercontent.com/Kiwitwitter/hexo-storage/master/img/Screen%20Shot%202021-03-28%20at%2011.29.38%20PM.png" alt></p>
+<ul>
+<li>Applications queries ElastiCache, if not available, get from RDS and store in ElastiCache.</li>
+<li>Helps relieve load in RDS</li>
+<li>Cache must have an invalidation strategy to make sure only the most current data is used in there.</li>
+</ul>
+<h4 id="User-Session-Store"><a href="#User-Session-Store" class="headerlink" title="User Session Store"></a>User Session Store</h4><p><img src="https://raw.githubusercontent.com/Kiwitwitter/hexo-storage/master/img/Screen%20Shot%202021-03-28%20at%2011.42.46%20PM.png" alt></p>
+<ul>
+<li>User logs into any of the application</li>
+<li>The application writes the session data into ElastiCache</li>
+<li>The user hits another instance of our application</li>
+<li>The instance retrieves the data and the user is already logged in</li>
+</ul>
+<h3 id="ElastiCache-Redis-vs-Memcached"><a href="#ElastiCache-Redis-vs-Memcached" class="headerlink" title="ElastiCache - Redis vs Memcached"></a>ElastiCache - Redis vs Memcached</h3><table>
+<thead>
+<tr>
+<th>REDIS</th>
+<th>MEMCACHED</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>* Multi AZ with Auto-Failover<br>* Read Replicas to scale reads and have high availability<br>* Data Durability using AOF persistence<br>* Backup and restore features</td>
+<td>* Multi-node for partitioning of data (sharding)<br>* No persistence<br>* No backup and restore<br>Multi-threaded architecture</td>
+</tr>
+</tbody></table>
+<h3 id="Lazy-Loading"><a href="#Lazy-Loading" class="headerlink" title="Lazy Loading"></a>Lazy Loading</h3><ul>
+<li><p>Pros:</p>
+<ul>
+<li>Only requested data is cached (the cache isn’t filled up with unused data)</li>
+<li>Node failures are not fatal (just increased latency to warm the cache)</li>
+</ul>
+</li>
+<li><p>Cons:</p>
+<ul>
+<li>Cache miss penalty that results in 3 round trips, noticeable delay for that request</li>
+<li>Stale data: data can be updated in the database and outdated in the cache</li>
+</ul>
+</li>
+<li><p>Python PseudoCode:</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_user</span><span class="params">(user_id)</span>:</span></span><br><span class="line">  <span class="comment"># Check the cache</span></span><br><span class="line">  record = cache.get(user_id)</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">if</span> record <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">    <span class="comment"># Run a DB query</span></span><br><span class="line">    record = db.query(<span class="string">"select * from users where id = ?"</span>, user_id)</span><br><span class="line">    <span class="comment"># Populate the cache</span></span><br><span class="line">    cache.get(user_id, record)</span><br><span class="line">    <span class="keyword">return</span> record</span><br><span class="line">  <span class="keyword">else</span>:</span><br><span class="line">    <span class="keyword">return</span> record</span><br><span class="line">  </span><br><span class="line"><span class="comment"># App code</span></span><br><span class="line">user = get_user(<span class="number">17</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="Write-through"><a href="#Write-through" class="headerlink" title="Write through"></a>Write through</h3><p>Add or Update the cache when databases is updated.</p>
+<p><img src="https://raw.githubusercontent.com/Kiwitwitter/hexo-storage/master/img/Screen%20Shot%202021-03-29%20at%2012.12.25%20AM.png" alt></p>
+</li>
+<li><p>Pros:</p>
+<ul>
+<li>Data in cache is never stale, reads are quick</li>
+<li>Write penalty vs Read penalty (each write requires 2 calls)</li>
+</ul>
+</li>
+<li><p>Cons:</p>
+<ul>
+<li>Missing Data until it is added / updated in the DB. Mitigation is to implement Lazy Loading strategy as well</li>
+<li>Cache churn – a lot of the data will never be read</li>
+</ul>
+</li>
+<li><p>PseudoCode:</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">save_user</span><span class="params">(user_id, values)</span>:</span></span><br><span class="line">  record = db.query(<span class="string">"update users ... where id = ?"</span>, user_id, values)</span><br><span class="line">  cache.set(user_id, record)</span><br><span class="line">  <span class="keyword">return</span> record</span><br><span class="line"></span><br><span class="line"><span class="comment"># App code</span></span><br><span class="line">user = save_user(<span class="number">17</span>, &#123;<span class="string">"Name"</span>:<span class="string">"Fake"</span>&#125;)</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="Cache-Eviction-and-TTL"><a href="#Cache-Eviction-and-TTL" class="headerlink" title="Cache Eviction and TTL"></a>Cache Eviction and TTL</h3><ul>
+<li>Cache eviction can occur in three ways:<ol>
+<li>You delete the item explicitly in the cache</li>
+<li>Item is evicted because the memory is full and it’s not recently used (LRU)</li>
+<li>You set an item time-to-live (or TTL)</li>
+</ol>
+</li>
+<li>TTL are helpful for any kind of data:<ul>
+<li>Leaderboards</li>
+<li>Comments</li>
+<li>Activity streams</li>
+</ul>
+</li>
+<li>TTL can range from few seconds to hours or days</li>
+<li>If too many evictions happen due to memory, you should scale up or out</li>
+</ul>
+]]></content>
+      <tags>
+        <tag>study</tag>
+        <tag>aws_certified_developer_associate</tag>
+      </tags>
   </entry>
   <entry>
     <title>Aws Certified Developer Associate, EC2 Storages</title>
